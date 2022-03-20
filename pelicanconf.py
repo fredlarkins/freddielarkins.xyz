@@ -1,0 +1,53 @@
+AUTHOR = 'Freddie Larkins'
+SITENAME = "Freddie's SEO Blog ://"
+
+# -- testing the below -- #
+SITETITLE = "Freddie Larkins" 
+SITEDESCRIPTION = 'Home of the ramblings of an SEO currently working for Zoopla.'
+SITESUBTITLE = 'SEO, Python and other stuff.'
+#-- end test -- #
+
+SITEURL = ''
+
+DISPLAY_PAGES_ON_MENU = False
+
+PATH = 'content'
+
+STATIC_PATHS = ['images', 'pdfs']
+
+TIMEZONE = 'Europe/London'
+
+DEFAULT_LANG = 'en'
+
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
+
+# Blogroll
+LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
+         ('about me', '/pages/about-me.html'),)
+
+# Social widget
+SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
+          ('linkedin', 'https://www.linkedin.com/in/freddielarkins/'),)
+
+DEFAULT_PAGINATION = 3
+
+# Uncomment following line if you want document-relative URLs when developing
+RELATIVE_URLS = True
+
+# theme specific stuff: Flex
+THEME = 'themes/Flex-fork'
+THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
+THEME_COLOR_ENABLE_USER_OVERRIDE = True
+
+CC_LICENSE = {
+    "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
+    "version": "4.0",
+    "slug": "by-sa",
+    "icon": True,
+    "language": "en_GB",
+}
