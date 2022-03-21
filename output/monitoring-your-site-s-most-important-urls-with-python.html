@@ -4,12 +4,12 @@
 <head>
 
   <!-- adding favicon link tags to the head -->
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-  <link rel="manifest" href="images/favicons/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/site.webmanifest">
   <!--for some reason, the below breaks the code highlighting in codeblocks-->
-  <!-- <meta name="msapplication-TileColor" content="#da532c">  -->
+  <meta name="msapplication-TileColor" content="#da532c"> 
   <meta name="theme-color" content="#ffffff">
   <!-- end favicons -->
   
@@ -24,14 +24,13 @@
     <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
-          media="(prefers-color-scheme: dark)"
+        disabled="disabled"
     href="./theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
-              media="(prefers-color-scheme: dark)"
+            disabled="disabled"
           href="./theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
           href="./theme/pygments/github.min.css">
 
 
@@ -50,7 +49,7 @@
 
 <meta name="author" content="Freddie Larkins" />
 <meta name="description" content="I wrote a few Python scripts that monitor your site&#39;s most important URLs for any 4xx and 5xx errors. Here&#39;s how they work." />
-<meta name="keywords" content="Search Console API, cron, requests">
+<meta name="keywords" content="Search Console API, aiohttp, yagmail">
 
 
   <meta property="og:site_name" content="Freddie's SEO Blog ://"/>
@@ -64,14 +63,14 @@
   <meta property="article:author" content="./author/freddie-larkins.html">
   <meta property="article:section" content="Python"/>
   <meta property="article:tag" content="Search Console API"/>
-  <meta property="article:tag" content="cron"/>
-  <meta property="article:tag" content="requests"/>
+  <meta property="article:tag" content="aiohttp"/>
+  <meta property="article:tag" content="yagmail"/>
   <meta property="og:image" content="">
 
   <title>Monitoring your site&#39;s most important URLs with Python | Freddie's SEO Blog ://</title>
 
 </head>
-<body >
+<body class="light-theme">
   <aside>
     <div>
       <a href="./">
@@ -94,6 +93,9 @@
             </li>
             <li>
               <a target="_self" href="/pages/about-me.html" >about me</a>
+            </li>
+            <li>
+              <a target="_self" href="/archives.html" >archives</a>
             </li>
         </ul>
       </nav>
@@ -138,7 +140,7 @@
 <p>Otherwise, here's how it works in a little more detail.</p>
 <h2>Querying the Search Console API</h2>
 <p>The idea behind this project was to only monitor the site's most important URLs for downtime. Therefore, the script queries the Search Console API (GSC API) for a list of the top X URLs (where X is specified by the user when invoking the script) by organic clicks.</p>
-<p>The <code>query()</code> function in <code>query_search_console.py</code> does this job. Using Josh Carty's user-friendly <a href="https://github.com/joshcarty/google-searchconsole">google-searchconsole</a> package, it authenticates to the API with client_secret.json and client_config.json files - downloaded from the Google Develeoper Console. The important bit of the function is this:</p>
+<p>The <code>query()</code> function in <code>query_search_console.py</code> does this job. Using Josh Carty's user-friendly <a href="https://github.com/joshcarty/google-searchconsole">google-searchconsole</a> package, it authenticates to the API with client_secret.json and client_config.json files - downloaded from the Google Developer Console. The important bit of the function is this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">webprop</span><span class="o">.</span><span class="n">query</span>\ <span class="c1"># webprop is a &#39;webproperty&#39; object - just like the properties you see in the GSC GUI</span>
 
         <span class="c1"># asks the API for the last month of data</span>
@@ -157,13 +159,41 @@
 <span class="k">return</span> <span class="n">df</span> <span class="c1"># return the result as a DataFrame</span>
 </code></pre></div>
 
-<p>Calling <code>query()</code> supplies us with the list of URLs that are checked for errors.</p>
+<p>Calling <code>query()</code> supplies us with the DataFrame from which we'll get the list of URLs that are checked for errors.</p>
+<h2>Checking the URLs for errors</h2>
+<p>The <code>check_urls.py</code> takes care of this part, leveraging the aiohttp library. For an awesome video on using aiohttp to make requests, check out John Watson Rooney's <a href="https://youtu.be/lUwZ9rS0SeM">'Web Scraping with AIOHTTP and Python'</a>.</p>
+<p>There are two really cool things about aiohttp. First, you can make requests asynchronously. aiohttp won't wait for the response from URL X before it requests URL Y - radically speeding up how many requests you can make in a given time period.</p>
+<p>Second, when you call <code>session.get(url)</code> using an <code>aiohttpClientSession</code> object, only the response headers are returned, rather than the full HTML contents. The latter can be obtained via the <code>text()</code> method. It's a lightweight way of getting the information we need; after all, if we only want to know whether the URL is throwing an error or has been redirected, we only need the response codes from the server.</p>
+<p>Expressed in code, it looks like this:</p>
+<div class="highlight"><pre><span></span><code> <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">:</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+        <span class="n">resolved_url</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">url</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
+                <span class="n">redirect_type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+                <span class="n">redirect_url</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">redirect_type</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">redirect_url</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div>
+
+<p>Notice we're not calling <code>resp.text()</code> at any point, as we don't need the HTML content to ascertain whether the URL is returning a 3xx or 4xx status code.</p>
+<p>Looping through each of the URLs obtained in the previous step, we'll record the URL, status code, error message (if applicable, e.g. in the case of a server error), redirect type, redirect URL and resolved URL. If any URLs throw errors, the user will be emailed in the next step.</p>
+<h2>Emailing the user about errors</h2>
+<p><code>app.py</code> is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
+<img alt="Screenshot of a warning email" src="/images/errors-detected.png">
+<center><em>Oh no!</em></center></p>
+<p>The emails are sent using the <a href="https://pypi.org/project/yagmail/">yagmail</a> package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!</p>
+<h2>Learnings</h2>
+<p>This was the first repo I made public on my GitHub, so it was quite exciting to release. I'm under no illusions that nobody will really use it, but it's a useful exercise to pretend as though people will! That forces you to focus on catching errors and communicating to the user why the script failed.</p>
+<p>Having said that, reading back through my code was a bit of a challenge. It's rather unwieldy and the end result could probably be achieved in one python file rather than several. It would also have been cool to have integrated a means of keeping track of <em>known</em> errors. I noticed that it would remind me every day of the same problem URLs.</p>
+<p>Overall, though, I'm proud of it as my first attempt to give back to the SEO Pythonista community. 3 GitHub stars and counting!</p>
   </div>
   <div class="tag-cloud">
     <p>
       <a href="./tag/search-console-api.html">Search Console API</a>
-      <a href="./tag/cron.html">cron</a>
-      <a href="./tag/requests.html">requests</a>
+      <a href="./tag/aiohttp.html">aiohttp</a>
+      <a href="./tag/yagmail.html">yagmail</a>
     </p>
   </div>
 
@@ -175,7 +205,7 @@
 
     <footer>
 <p>
-  &copy;   - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; March 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>
 Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
@@ -183,7 +213,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
           src="./theme/dark-theme/dark-theme.min.js"
-          data-enable-auto-detect-theme="True"
+          data-enable-auto-detect-theme="false"
           data-default-theme="light"
           type="text/javascript">
   </script>
