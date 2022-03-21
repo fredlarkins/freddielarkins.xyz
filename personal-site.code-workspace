@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../../../../var/www/html"
-		},
-		{
 			"path": "../../../../etc/apache2/sites-available"
 		}
 	],
