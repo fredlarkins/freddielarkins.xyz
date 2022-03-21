@@ -1,3 +1,5 @@
+from datetime import datetime
+
 AUTHOR = 'Freddie Larkins'
 SITENAME = "Freddie's SEO Blog ://"
 
@@ -28,7 +30,8 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
-         ('about me', '/pages/about-me.html'),)
+         ('about me', '/pages/about-me.html'),
+         ('archives', '/archives.html'),)
 
 # Social widget
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
@@ -41,8 +44,10 @@ RELATIVE_URLS = True
 
 # theme specific stuff: Flex
 THEME = 'themes/Flex-fork'
-THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
+# THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
+
+# MAIN_MENU = False
 
 CC_LICENSE = {
     "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
@@ -51,3 +56,5 @@ CC_LICENSE = {
     "icon": True,
     "language": "en_GB",
 }
+
+COPYRIGHT_YEAR = datetime.now().strftime('%B %Y') # and month, technically
