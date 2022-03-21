@@ -31,7 +31,7 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
          ('about me', '/pages/about-me.html'),
-         ('archives', '/archives.html'),)
+         ('blog archives', '/archives.html'),)
 
 # Social widget
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
