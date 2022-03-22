@@ -31,7 +31,7 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
          ('about me', '/pages/about-me.html'),
-         ('blog archives', '/archives.html'),)
+         ('archives', '/archives.html'))
 
 # Social widget
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
@@ -48,6 +48,21 @@ THEME = 'themes/Flex-modified'
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
 # MAIN_MENU = False
+
+# from https://github.com/pelican-plugins/sitemap
+SITEMAP = {
+    "format": "xml",
+    "priorities": {
+        "articles": 0.5,
+        "indexes": 0.5,
+        "pages": 0.5
+    },
+    "changefreqs": {
+        "articles": "yearly",
+        "indexes": "monthly",
+        "pages": "yearly"
+    }
+}
 
 CC_LICENSE = {
     "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
