@@ -2,6 +2,7 @@
 venv/
 #*.todo
 *.code-workspace
+*.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
