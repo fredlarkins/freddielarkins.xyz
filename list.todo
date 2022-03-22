@@ -1,0 +1,13 @@
+Apache:
+    ☐ Read through docs
+    ☐ What are Virtual Hosts?
+
+Security:
+    ☐ How to secure a server (what are user groups)
+    ☐ How to get SSL certificates
+
+Long term:
+    ☐ Page showing log requests (iframe)
+    ☐ Page showing top-level pi-hole stats
+    ☐ Linux command log - every command I use, create an entry explaining what it does
+    ☐ Server status page? (https://httpd.apache.org/docs/2.4/mod/mod_status.html)

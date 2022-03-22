@@ -1,7 +1,7 @@
 # project specific stuff
 venv/
-*.todo
-*.code-workspace
+#*.todo
+#*.code-workspace
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
