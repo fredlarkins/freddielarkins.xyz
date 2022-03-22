@@ -1,13 +1,16 @@
 Apache:
-    ☐ Read through docs
-    ☐ What are Virtual Hosts?
+    ✔ Read through docs @done (22/03/2022, 12:47:12)
+    ✔ What are Virtual Hosts? @done (22/03/2022, 12:47:13)
 
 Security:
     ☐ How to secure a server (what are user groups)
-    ☐ How to get SSL certificates
+    ✔ How to get SSL certificates @done (22/03/2022, 12:47:09)
 
 Long term:
     ☐ Page showing log requests (iframe)
     ☐ Page showing top-level pi-hole stats
     ☐ Linux command log - every command I use, create an entry explaining what it does
     ☐ Server status page? (https://httpd.apache.org/docs/2.4/mod/mod_status.html)
+
+Rsyc:
+    ☐ Learn how to use and set up
