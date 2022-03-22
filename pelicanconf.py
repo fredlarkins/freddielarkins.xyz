@@ -43,7 +43,7 @@ DEFAULT_PAGINATION = 3
 RELATIVE_URLS = True
 
 # theme specific stuff: Flex
-THEME = 'themes/Flex-fork'
+THEME = 'themes/Flex-modified'
 # THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
