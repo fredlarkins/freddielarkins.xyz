@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Freddie's SEO Blog ://</title><link href="https://freddielarkins.xyz/" rel="alternate"></link><link href="https://freddielarkins.xyz/feeds/all.atom.xml" rel="self"></link><id>https://freddielarkins.xyz/</id><updated>2022-03-20T16:23:00+00:00</updated><subtitle>SEO, Python and other stuff.</subtitle><entry><title>Using Text to Columns to analyse a site's traffic sources</title><link href="https://freddielarkins.xyz/using-text-to-columns-to-analyse-a-site-s-traffic-sources.html" rel="alternate"></link><published>2022-03-20T16:23:00+00:00</published><updated>2022-03-20T16:23:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-20:/using-text-to-columns-to-analyse-a-site-s-traffic-sources.html</id><summary type="html">&lt;p&gt;Excel's Text to Columns feature is a quick and easy way to segment a list of URLs by subfolder to understand which parts of a site drive organic traffic.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Text to Columns is probably one of the tools I use most frequently in my day-to-day SEO work.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Kudos to Distilled's &lt;a href="https://www.distilled.net/excel-for-seo/"&gt;Excel for SEOs&lt;/a&gt; guide for inspiring this article – I'd highly recommend it to any SEOs looking to sharpen up their Excel skills. Anyway, let's get into it.&lt;/p&gt;
+&lt;h2&gt;How to use Text to Columns&lt;/h2&gt;
+&lt;p&gt;I've used an Ahrefs export for &lt;a href="https://www.hubspot.com/"&gt;HubSpot&lt;/a&gt; for this demo, but you can use Text to Columns for any dataset containing URLs or URL paths.&lt;/p&gt;
+&lt;h3&gt;1) Format your data as a table&lt;/h3&gt;
+&lt;p&gt;Highlight your dataset with &lt;code&gt;CTRL+A&lt;/code&gt; and convert it into a table with CTRL+T.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the 'Create Table' pop-up" src="/images/create-table.png"&gt;&lt;/p&gt;
+&lt;p&gt;(This step is optional – I find it makes the data easier to work with.)&lt;/p&gt;
+&lt;h3&gt;2) Split out the URLs using Text to Columns&lt;/h3&gt;
+&lt;p&gt;Highlight the column containing your URLs. In the top Ribbon, click on &lt;code&gt;Data&lt;/code&gt; &amp;gt; &lt;code&gt;Text to Columns&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the location of the Text to Columns button in Excel" src="/images/text-to-columns-location.png"&gt;&lt;/p&gt;
+&lt;p&gt;That'll bring up the Text to Columns Wizard. We'll run through the steps carefully to get the desired output.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; leave the Wizard as is and hit &lt;code&gt;Next &amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot showing step 1 of the Text to Columns Wizard" src="/images/text-to-columns-wizard-screenshot-step-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;The option to split our text (the URLs) by a delimiter – i.e. a specified text character – is selected by default.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; uncheck the default delimiter (Tab) and enter a forward slash in the &lt;code&gt;Other:&lt;/code&gt; input box.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot showing step 2 of the Text to Columns Wizard" src="/images/text-to-columns-wizard-screenshot-step-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;This tells the Text to Columns wizard to look for forward slashes as a way of 'splitting up' your URLs. You can also check &lt;code&gt;Treat consecutive delimiters as one&lt;/code&gt; to avoid an empty output column for the second slash in 'https:/&lt;strong&gt;/&lt;/strong&gt;'.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; select where the output will go.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of step 3 of the Text to Columns wizard" src="/images/text-to-columns-wizard-screenshot-step-3.png"&gt;&lt;/p&gt;
+&lt;p&gt;Choose the first cell in the first empty column next to your table. &lt;em&gt;Beware:&lt;/em&gt; if you proceed with Excel's default selection for the Destination cell, the newly-generated columns will overwrite whatever data you have in the columns to the right of your URLs.&lt;/p&gt;
+&lt;p&gt;And we're done!&lt;/p&gt;
+&lt;p&gt;I like to rename my columns to make analysis a little easier.&lt;/p&gt;
+&lt;p&gt;I also tend to filter the first 'subfolder' column – &lt;code&gt;Path_1&lt;/code&gt; – for any blank cells and fill these in as 'homepage'.&lt;/p&gt;
+&lt;h2&gt;Analysing your data for SEO insights&lt;/h2&gt;
+&lt;p&gt;You can use every SEO's best friend – a pivot table – to mine your data for useful insights. To turn your data into a pivot, highlight your table with &lt;code&gt;CTRL+A&lt;/code&gt; and hit &lt;code&gt;ALT+D+P&lt;/code&gt; to open up the PivotTable wizard, mashing &lt;code&gt;Enter&lt;/code&gt; until a pivot table appears in a new sheet.&lt;/p&gt;
+&lt;p&gt;Let's see what we can find out about HubSpot.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The majority of traffic goes to HubSpot's blog subdomain&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To be precise, Ahrefs estimates that almost 91% of traffic goes to its blog. Kudos to HubSpot's content creation team!&lt;/p&gt;
+&lt;p&gt;This pivot chart uses the 'Domain/subdomain' column generated by Text to Columns, aggregating traffic:
+&lt;img alt="Pie chart showing traffic by subdomain" src="/images/traffic-by-subdomain.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HubSpot's blog traffic is driven by its /marketing/, /sales/ and /website/ subfolders&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This time, we've gone one level deeper to investigate the subfolders within &lt;a href="https://blog.hubspot.com/"&gt;https://blog.hubspot.com/&lt;/a&gt;. It seems that HubSpot's marketing content drives over half of of all traffic to its blog, followed by its Sales and Webmaster content.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Bar chart showing traffic by subfolder within the blog" src="/images/traffic-by-blog-subfolder.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Almost a quarter of blog traffic is driven by featured snippets&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I've turned this final pivot table into a Bar Graph via &lt;code&gt;Insert&lt;/code&gt; &amp;gt; &lt;code&gt;Recommended Charts&lt;/code&gt; &amp;gt; &lt;code&gt;Clustered Column&lt;/code&gt;. And wow! Almost 25% of the half a million monthly sessions to the blog come via a featured snippet. HubSpot are clearly masters at answering a user's primary question on a topic in a clear and concise manner.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Bar chart showing traffic to the blog by SERP feature" src="/images/traffic-by-serp-feature.png"&gt;
+&lt;center&gt;&lt;em&gt;I get it - I'm terrible at Data Vis&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;There is lots more you can do with this dataset; we haven't even started incorporating keywords into our analysis yet!&lt;/p&gt;
+&lt;p&gt;Feel free to &lt;a href="/excel_files/hubspot-t2c-analysis.xlsx"&gt;download the Excel spreadsheet&lt;/a&gt; used in this tutorial and have a go yourself!&lt;/p&gt;</content><category term="SEO"></category><category term="Excel"></category><category term="Text to Columns"></category></entry><entry><title>Identifying branded keywords in Excel</title><link href="https://freddielarkins.xyz/identifying-branded-keywords-in-excel.html" rel="alternate"></link><published>2022-03-20T15:59:00+00:00</published><updated>2022-03-20T15:59:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-20:/identifying-branded-keywords-in-excel.html</id><summary type="html">&lt;p&gt;It’s always helpful to identify branded terms when you’re dealing with a list of keywords. Filtering them out gives you a view on non-branded performance and potential areas of improvement.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Any large-scale analysis of a group of keywords is always enhanced by identifying branded and non-branded keywords. Thankfully, it's simple to do in Excel.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;The formula&lt;/h2&gt;
+&lt;p&gt;Assuming your keywords are in column A, this formula should do the trick:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;IF&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;ISNUMBER&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;SEARCH&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;BRANDNAME&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="nv"&gt;A2&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Non-branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Just replace &lt;code&gt;BRANDNAME&lt;/code&gt; with the brand that you’re working, copy and paste the formula into Excel and apply it to the entire column of keywords. That’ll give you a column with either a 'Branded' or 'Non-branded' value for each keyword.&lt;/p&gt;
+&lt;h2&gt;How it works&lt;/h2&gt;
+&lt;p&gt;Let’s break down each part of the formula, working inside out. We’ll use an example set of Nike keywords to illustrate each step.&lt;/p&gt;
+&lt;h3&gt;The SEARCH function&lt;/h3&gt;
+&lt;p&gt;The &lt;a href="https://exceljet.net/excel-functions/excel-search-function"&gt;SEARCH function&lt;/a&gt; looks for the provided string of text inside another &lt;a href="https://www.deskbright.com/excel/excel-string-functions/"&gt;string&lt;/a&gt; of text, returning the position of the first character in the case of a match. It’s not case sensitive. In our case, &lt;code&gt;=SEARCH("nike",A2)&lt;/code&gt; is asking Excel to look for the text “nike” inside our keyword text string.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function to a set of keywords." src="/images/search-function-screenshot.png"&gt;&lt;/p&gt;
+&lt;p&gt;If it is present, the formula will return the position of the “n” in “nike”. If it is not present, the formula will evaluate as a #VALUE! error.&lt;/p&gt;
+&lt;h3&gt;The ISNUMBER function&lt;/h3&gt;
+&lt;p&gt;The &lt;a href="https://exceljet.net/excel-functions/excel-isnumber-function"&gt;ISNUMBER function&lt;/a&gt; simply checks that a given cell is a number, returning either TRUE or FALSE. Thus, our formula becomes &lt;code&gt;=ISNUMBER(SEARCH("nike"),A2)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function in conjunction with ISNUMBER to a set of keywords." src="/images/search-and-isnumber-functions.png"&gt;&lt;/p&gt;
+&lt;p&gt;By wrapping our &lt;code&gt;SEARCH&lt;/code&gt; function with &lt;code&gt;ISNUMBER&lt;/code&gt;, we’re converting the output of the former into a Boolean TRUE or FALSE value. In other words:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If “nike” is &lt;em&gt;present&lt;/em&gt; in keyword –&amp;gt; &lt;code&gt;SEARCH&lt;/code&gt; returns a number –&amp;gt; &lt;code&gt;ISNUMBER&lt;/code&gt; evaluates as TRUE&lt;/li&gt;
+&lt;li&gt;If “nike” is &lt;em&gt;not present&lt;/em&gt; in keyword –&amp;gt; &lt;code&gt;SEARCH&lt;/code&gt; returns an #VALUE! error –&amp;gt; &lt;code&gt;ISNUMBER&lt;/code&gt; evaluates as FALSE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Essentially, we’re converting the results of &lt;code&gt;SEARCH&lt;/code&gt; into something we can use in the final component of the formula, our &lt;code&gt;IF&lt;/code&gt; statement.&lt;/p&gt;
+&lt;h3&gt;The IF function&lt;/h3&gt;
+&lt;p&gt;The &lt;a href="https://exceljet.net/excel-functions/excel-if-function"&gt;IF function&lt;/a&gt; uses a logical test to return one value for a TRUE result, and another for FALSE.&lt;/p&gt;
+&lt;p&gt;We bring everything together using an &lt;code&gt;IF&lt;/code&gt; statement: &lt;code&gt;=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of an Excel table showing the full function" src="/images/search-isnumber-and-if-functions.png"&gt;&lt;/p&gt;
+&lt;p&gt;Our logical test is the &lt;code&gt;ISNUMBER(...)&lt;/code&gt; component of the function. If that evaluates as TRUE, the &lt;code&gt;IF&lt;/code&gt; statement returns “Branded”. If FALSE, it returns “Non-branded”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;And that’s it!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I use this function without fail when I’m dealing with lists of keywords. After reading this, hopefully you will too.&lt;/p&gt;</content><category term="SEO"></category><category term="Excel"></category></entry><entry><title>Monitoring your site's most important URLs with Python</title><link href="https://freddielarkins.xyz/monitoring-your-site-s-most-important-urls-with-python.html" rel="alternate"></link><published>2022-03-19T15:09:00+00:00</published><updated>2022-03-19T15:09:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-19:/monitoring-your-site-s-most-important-urls-with-python.html</id><summary type="html">&lt;p&gt;I wrote a few Python scripts that monitor your site's most important URLs for any 4xx and 5xx errors. Here's how they work.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;I've you've ever discovered a piece of content has been accidentally redirected or removed, this article might be for you.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As SEOs, we're precious about our site's traffic - especially when we're losing it! The inspo for this collection of Python scripts arose at work, where I'd noticed a few pieces of traffic-driving bits of content had been accidentally redirected elsewhere, or were stuck in infinite redirect loops. Of course, in both cases, traffic loss was the result.&lt;/p&gt;
+&lt;p&gt;This &lt;a href="https://github.com/fredlarkins/monitor-top-urls"&gt;GitHub repo was&lt;/a&gt; my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check. If you just want to go ahead and try it, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone https://github.com/fredlarkins/monitor-top-urls.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;... and follow the README.md for set-up instructions.&lt;/p&gt;
+&lt;p&gt;Otherwise, here's how it works in a little more detail.&lt;/p&gt;
+&lt;h2&gt;Querying the Search Console API&lt;/h2&gt;
+&lt;p&gt;The idea behind this project was to only monitor the site's most important URLs for downtime. Therefore, the script queries the Search Console API (GSC API) for a list of the top X URLs (where X is specified by the user when invoking the script) by organic clicks.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;query()&lt;/code&gt; function in &lt;code&gt;query_search_console.py&lt;/code&gt; does this job. Using Josh Carty's user-friendly &lt;a href="https://github.com/joshcarty/google-searchconsole"&gt;google-searchconsole&lt;/a&gt; package, it authenticates to the API with client_secret.json and client_config.json files - downloaded from the Google Developer Console. The important bit of the function is this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;webprop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;\ &lt;span class="c1"&gt;# webprop is a &amp;#39;webproperty&amp;#39; object - just like the properties you see in the GSC GUI&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# asks the API for the last month of data&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;today&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;months&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;\
+
+        &lt;span class="c1"&gt;# aggregates the data by page&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dimension&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;page&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;\
+
+        &lt;span class="c1"&gt;# limits the number of URLs returned by the API to num_urls...&lt;/span&gt;
+        &lt;span class="c1"&gt;# ... which is supplied by the user as a command-line argument&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_urls&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;\
+
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;\
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_dataframe&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="c1"&gt;# return the result as a DataFrame&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Calling &lt;code&gt;query()&lt;/code&gt; supplies us with the DataFrame from which we'll get the list of URLs that are checked for errors.&lt;/p&gt;
+&lt;h2&gt;Checking the URLs for errors&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;check_urls.py&lt;/code&gt; takes care of this part, leveraging the aiohttp library. For an awesome video on using aiohttp to make requests, check out John Watson Rooney's &lt;a href="https://youtu.be/lUwZ9rS0SeM"&gt;'Web Scraping with AIOHTTP and Python'&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are two really cool things about aiohttp. First, you can make requests asynchronously. aiohttp won't wait for the response from URL X before it requests URL Y - radically speeding up how many requests you can make in a given time period.&lt;/p&gt;
+&lt;p&gt;Second, when you call &lt;code&gt;session.get(url)&lt;/code&gt; using an &lt;code&gt;aiohttpClientSession&lt;/code&gt; object, only the response headers are returned, rather than the full HTML contents. The latter can be obtained via the &lt;code&gt;text()&lt;/code&gt; method. It's a lightweight way of getting the information we need; after all, if we only want to know whether the URL is throwing an error or has been redirected, we only need the response codes from the server.&lt;/p&gt;
+&lt;p&gt;Expressed in code, it looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt; &lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;status_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;resolved_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;
+        &lt;span class="n"&gt;error_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;history&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;redirect_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;history&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;redirect_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;history&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;redirect_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="n"&gt;redirect_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice we're not calling &lt;code&gt;resp.text()&lt;/code&gt; at any point, as we don't need the HTML content to ascertain whether the URL is returning a 3xx or 4xx status code.&lt;/p&gt;
+&lt;p&gt;Looping through each of the URLs obtained in the previous step, we'll record the URL, status code, error message (if applicable, e.g. in the case of a server error), redirect type, redirect URL and resolved URL. If any URLs throw errors, the user will be emailed in the next step.&lt;/p&gt;
+&lt;h2&gt;Emailing the user about errors&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;app.py&lt;/code&gt; is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
+&lt;img alt="Screenshot of a warning email" src="/images/errors-detected.png"&gt;
+&lt;center&gt;&lt;em&gt;Oh no!&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;The emails are sent using the &lt;a href="https://pypi.org/project/yagmail/"&gt;yagmail&lt;/a&gt; package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!&lt;/p&gt;
+&lt;h2&gt;Learnings&lt;/h2&gt;
+&lt;p&gt;This was the first repo I made public on my GitHub, so it was quite exciting to release. I'm under no illusions that nobody will really use it, but it's a useful exercise to pretend as though people will! That forces you to focus on catching errors and communicating to the user why the script failed.&lt;/p&gt;
+&lt;p&gt;Having said that, reading back through my code was a bit of a challenge. It's rather unwieldy and the end result could probably be achieved in one python file rather than several. It would also have been cool to have integrated a means of keeping track of &lt;em&gt;known&lt;/em&gt; errors. I noticed that it would remind me every day of the same problem URLs.&lt;/p&gt;
+&lt;p&gt;Overall, though, I'm proud of it as my first attempt to give back to the SEO Pythonista community. 3 GitHub stars and counting!&lt;/p&gt;</content><category term="Python"></category><category term="Search Console API"></category><category term="aiohttp"></category><category term="yagmail"></category></entry></feed>
