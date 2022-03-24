@@ -18,4 +18,6 @@ CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+
+# Removed because I think it's conflicting with my own injection of the script tag in base.html
+#GOOGLE_ANALYTICS = 'G-7XLXLD52JM'
