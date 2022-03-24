@@ -8,6 +8,11 @@ Slug: identifying-branded-keywords-in-excel
 
 **Any large-scale analysis of a group of keywords is always enhanced by identifying branded and non-branded keywords. Thankfully, it's simple to do in Excel.**
 
+---
+[TOC]
+
+---
+
 ## The formula
 Assuming your keywords are in column A, this formula should do the trick:
 

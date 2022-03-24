@@ -30,6 +30,9 @@ You can check out the repo below:
 I'll run through some of the interesting challenges I when building the bot.
 
 ---
+[TOC]
+
+---
 
 ## Challenges
 
@@ -51,7 +54,7 @@ To this:
 
 [screenshot of end screen]
 
-## Working out how the series of requests fit together
+### Working out how the series of requests fit together
 
 I've no shame in admitting it took me a while to get this right! 
 
@@ -59,7 +62,7 @@ I figured it would make sense to run through the flow as a user would, seeing wh
 
 
 
-### 1. Sending a postcode / choosing address
+#### 1. Sending a postcode / choosing address
 The first couple of requests are `POST` requests to the first server, `18.169.89.254`. It receives the user's postcode and returns the street addresses for the user to select. 
 
 `CTRL-F` was by best friend here: I could see that the postcode was buried deep in the request body. When testing this first step with other postcodes, I could see that nothing else changed in the lines and lines of JSON - just the postcode.
@@ -72,7 +75,7 @@ itemId: "5f898d4790478c0067f8c316"
 ```
 The user selects their address from the dropdown list; the application then uses that home's `itemId` in the next request to a second server, `3.10.72.124`, to query what bin collections apply to that property.
 
-### 2. Retrieving the bin collection services for the address
+#### 2. Retrieving the bin collection services for the address
 
 The next request is a `GET` request to server 2 (used for all subsequent requests), asking for the bin collection services applicable to that specific address. Not all addresses in Hackney have collections, and collection days vary by street. 
 
@@ -85,13 +88,13 @@ There is one field in the JSON response that we're interested in: `attributes_wa
 [step 1 image placeholder]
 
 For each value returned, the browser makes a request using the same scheme above (appending the `id` for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:
-```
+```text
 5fa55c586b4fb500650caf08 ---> Recycling Sack
 5faea1a108c64000672a88fe ---> Food Caddy (Small)
 ```
 And so on.
 
-### 3. Retrieving the collection schedules for each waste service
+#### 3. Retrieving the collection schedules for each waste service
 
 This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.
 
@@ -141,12 +144,9 @@ Anyways, we've finally got what we want: the collection timetables for each wast
 I scratched my head about this one for a while as well.
 
 I settled on the solution of running a daily script as a [Cron Job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) - basically a scheduled command - that loops through each timetable, subtracting every date listed from the present date. If the difference equals 1, the collection is the following day:
-```python
-'''
-The code in the script doesn't look quite like this, but the principles are the same.
-'''
-collection_is_due_tomorrow = []
 
+```python
+collection_is_due_tomorrow = []
     # looping through the timetable, getting the difference between today's date and the date in that iteration of the loop
     for date in timetable:
         
@@ -156,6 +156,7 @@ collection_is_due_tomorrow = []
 			# append the waste container to the 'collection_is_due_tomorrow' list
             collection_is_due_tomorrow.append(waste_container)
 ```
+
 The script composes a simple email including what is due the following day, and sends it to the email addresses provided when running `check-bins.py` for the first time.
 
 This is the email I received last Sunday:
@@ -168,7 +169,7 @@ And that's it! The Bin Bot's got us covered.
 ## Learnings
 I've done a bit of web scraping before, but this was the first time I tried to circumvent the front-end and go straight to the network requests to get the data I was after. So I'm definitely no expert. But I learned a fair bit from this exercise that'll hopefully serve me well in the future.
 
-#### 1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.
+### 1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.
  At first, I was slightly overwhelmed by the JSON I was sending and receiving. I couldn't work out which bits mattered, and which stayed the same no matter what address I was using. Text Compare tools could help me isolate the important variables.
 
 Take these two identical looking `POST`-request bodies:
@@ -177,12 +178,12 @@ Take these two identical looking `POST`-request bodies:
 
 Highlighted in blue, the only thing that is different between them is that very last value. From that, I know that bit of information is important, and likely explains why I get two different responses. You can use that approach with any two requests that look similar to zero in on the information that the server really needs.
 
-#### 2. Throttle DevTools to slow a series of requests down.
+### 2. Throttle DevTools to slow a series of requests down.
 Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:
 
 [throttling screenshot]
 
-#### 3. If you can't work it out, step away and do something else.
+### 3. If you can't work it out, step away and do something else.
 I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.
 
 ---
