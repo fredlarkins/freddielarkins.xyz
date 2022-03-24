@@ -133,25 +133,42 @@
     <p>
       Posted on Sun 20 March 2022 in <a href="./category/seo.html">SEO</a>
 
+      <!-- My addition - adding a different read-time plugin to the article template -->
+      <!--  -->
+
+        &#8226; 2 min read
     </p>
   </header>
 
 
   <div>
     <p><strong>Any large-scale analysis of a group of keywords is always enhanced by identifying branded and non-branded keywords. Thankfully, it's simple to do in Excel.</strong></p>
-<h2>The formula</h2>
+<hr>
+<div class="toc">
+<ul>
+<li><a href="#the-formula">The formula</a></li>
+<li><a href="#how-it-works">How it works</a><ul>
+<li><a href="#the-search-function">The SEARCH function</a></li>
+<li><a href="#the-isnumber-function">The ISNUMBER function</a></li>
+<li><a href="#the-if-function">The IF function</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="the-formula">The formula</h2>
 <p>Assuming your keywords are in column A, this formula should do the trick:</p>
 <div class="highlight"><pre><span></span><code><span class="o">=</span><span class="k">IF</span><span class="ss">(</span><span class="nv">ISNUMBER</span><span class="ss">(</span><span class="nv">SEARCH</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">BRANDNAME</span><span class="s2">&quot;</span>,<span class="nv">A2</span><span class="ss">))</span>,<span class="s2">&quot;</span><span class="s">Branded</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">Non-branded</span><span class="s2">&quot;</span><span class="ss">)</span>
 </code></pre></div>
 
 <p>Just replace <code>BRANDNAME</code> with the brand that you’re working, copy and paste the formula into Excel and apply it to the entire column of keywords. That’ll give you a column with either a 'Branded' or 'Non-branded' value for each keyword.</p>
-<h2>How it works</h2>
+<h2 id="how-it-works">How it works</h2>
 <p>Let’s break down each part of the formula, working inside out. We’ll use an example set of Nike keywords to illustrate each step.</p>
-<h3>The SEARCH function</h3>
+<h3 id="the-search-function">The SEARCH function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-search-function">SEARCH function</a> looks for the provided string of text inside another <a href="https://www.deskbright.com/excel/excel-string-functions/">string</a> of text, returning the position of the first character in the case of a match. It’s not case sensitive. In our case, <code>=SEARCH("nike",A2)</code> is asking Excel to look for the text “nike” inside our keyword text string.</p>
 <p><img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function to a set of keywords." src="/images/search-function-screenshot.png"></p>
 <p>If it is present, the formula will return the position of the “n” in “nike”. If it is not present, the formula will evaluate as a #VALUE! error.</p>
-<h3>The ISNUMBER function</h3>
+<h3 id="the-isnumber-function">The ISNUMBER function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-isnumber-function">ISNUMBER function</a> simply checks that a given cell is a number, returning either TRUE or FALSE. Thus, our formula becomes <code>=ISNUMBER(SEARCH("nike"),A2)</code>:</p>
 <p><img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function in conjunction with ISNUMBER to a set of keywords." src="/images/search-and-isnumber-functions.png"></p>
 <p>By wrapping our <code>SEARCH</code> function with <code>ISNUMBER</code>, we’re converting the output of the former into a Boolean TRUE or FALSE value. In other words:</p>
@@ -160,7 +177,7 @@
 <li>If “nike” is <em>not present</em> in keyword –&gt; <code>SEARCH</code> returns an #VALUE! error –&gt; <code>ISNUMBER</code> evaluates as FALSE</li>
 </ul>
 <p>Essentially, we’re converting the results of <code>SEARCH</code> into something we can use in the final component of the formula, our <code>IF</code> statement.</p>
-<h3>The IF function</h3>
+<h3 id="the-if-function">The IF function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-if-function">IF function</a> uses a logical test to return one value for a TRUE result, and another for FALSE.</p>
 <p>We bring everything together using an <code>IF</code> statement: <code>=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")</code></p>
 <p><img alt="Screenshot of an Excel table showing the full function" src="/images/search-isnumber-and-if-functions.png"></p>

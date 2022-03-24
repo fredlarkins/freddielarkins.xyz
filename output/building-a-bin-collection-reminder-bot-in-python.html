@@ -134,6 +134,10 @@
     <p>
       Posted on Wed 23 March 2022 in <a href="./category/python.html">Python</a>
 
+      <!-- My addition - adding a different read-time plugin to the article template -->
+      <!--  -->
+
+        &#8226; 6 min read
     </p>
   </header>
 
@@ -153,7 +157,28 @@
 
 <p>I'll run through some of the interesting challenges I when building the bot.</p>
 <hr>
-<h2>Challenges</h2>
+<div class="toc">
+<ul>
+<li><a href="#challenges">Challenges</a><ul>
+<li><a href="#working-out-how-the-series-of-requests-fit-together">Working out how the series of requests fit together</a><ul>
+<li><a href="#1-sending-a-postcode-choosing-address">1. Sending a postcode / choosing address</a></li>
+<li><a href="#2-retrieving-the-bin-collection-services-for-the-address">2. Retrieving the bin collection services for the address</a></li>
+<li><a href="#3-retrieving-the-collection-schedules-for-each-waste-service">3. Retrieving the collection schedules for each waste service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#setting-up-a-cron-job-to-send-bin-collection-alerts">Setting up a Cron Job to send bin-collection alerts</a></li>
+<li><a href="#learnings">Learnings</a><ul>
+<li><a href="#1-use-a-text-comparison-tool-to-tease-out-which-bits-of-request-bodies-responses-are-important">1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.</a></li>
+<li><a href="#2-throttle-devtools-to-slow-a-series-of-requests-down">2. Throttle DevTools to slow a series of requests down.</a></li>
+<li><a href="#3-if-you-cant-work-it-out-step-away-and-do-something-else">3. If you can't work it out, step away and do something else.</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="challenges">Challenges</h2>
 <p>When I first started on this project, I actually set out to build something in Selenium. I'd load up the HackneyWaste tool the in a headless browser and use a mixture of <code>browser.find_element()</code> the <code>browser.send_keys()</code> to run through the same flow that a real user would:</p>
 <ol>
 <li>Input postcode</li>
@@ -167,10 +192,10 @@
 <p>[screenshot of start screen]</p>
 <p>To this:</p>
 <p>[screenshot of end screen]</p>
-<h2>Working out how the series of requests fit together</h2>
+<h3 id="working-out-how-the-series-of-requests-fit-together">Working out how the series of requests fit together</h3>
 <p>I've no shame in admitting it took me a while to get this right! </p>
 <p>I figured it would make sense to run through the flow as a user would, seeing which requests pertain to each step in the flow.</p>
-<h3>1. Sending a postcode / choosing address</h3>
+<h4 id="1-sending-a-postcode-choosing-address">1. Sending a postcode / choosing address</h4>
 <p>The first couple of requests are <code>POST</code> requests to the first server, <code>18.169.89.254</code>. It receives the user's postcode and returns the street addresses for the user to select. </p>
 <p><code>CTRL-F</code> was by best friend here: I could see that the postcode was buried deep in the request body. When testing this first step with other postcodes, I could see that nothing else changed in the lines and lines of JSON - just the postcode.</p>
 <p>The response contains data for each of the addresses, such as street address and Basic Land and Property Unit class codes (I had to Google what those were - <em>tl;dr</em> they're not relevant for bin collections).</p>
@@ -179,7 +204,7 @@
 </code></pre></div>
 
 <p>The user selects their address from the dropdown list; the application then uses that home's <code>itemId</code> in the next request to a second server, <code>3.10.72.124</code>, to query what bin collections apply to that property.</p>
-<h3>2. Retrieving the bin collection services for the address</h3>
+<h4 id="2-retrieving-the-bin-collection-services-for-the-address">2. Retrieving the bin collection services for the address</h4>
 <p>The next request is a <code>GET</code> request to server 2 (used for all subsequent requests), asking for the bin collection services applicable to that specific address. Not all addresses in Hackney have collections, and collection days vary by street. </p>
 <p>The <code>itemID</code> we just obtained is used in the endpoint for this <code>GET</code> request:</p>
 <pre><code>https://api.uk.alloyapp.io/api/item/<b>5f898d4790478c0067f8c318</b>?token=67ad2108-dd2b-407a-849a-411a15adf0b1</code></pre>
@@ -187,12 +212,12 @@
 <p>There is one field in the JSON response that we're interested in: <code>attributes_wasteContainersAssignableWasteContainers</code>. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:</p>
 <p>[step 1 image placeholder]</p>
 <p>For each value returned, the browser makes a request using the same scheme above (appending the <code>id</code> for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:</p>
-<div class="highlight"><pre><span></span><code><span class="mf">5</span><span class="n">fa55c586b4fb500650caf08</span><span class="w"> </span><span class="o">---&gt;</span><span class="w"> </span><span class="n">Recycling</span><span class="w"> </span><span class="n">Sack</span><span class="w"></span>
-<span class="mf">5</span><span class="n">faea1a108c64000672a88fe</span><span class="w"> </span><span class="o">---&gt;</span><span class="w"> </span><span class="n">Food</span><span class="w"> </span><span class="n">Caddy</span><span class="w"> </span><span class="p">(</span><span class="n">Small</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code>5fa55c586b4fb500650caf08 ---&gt; Recycling Sack
+5faea1a108c64000672a88fe ---&gt; Food Caddy (Small)
 </code></pre></div>
 
 <p>And so on.</p>
-<h3>3. Retrieving the collection schedules for each waste service</h3>
+<h4 id="3-retrieving-the-collection-schedules-for-each-waste-service">3. Retrieving the collection schedules for each waste service</h4>
 <p>This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.</p>
 <p>The browser makes a <code>POST</code> request for each <code>id</code>  obtained above.</p>
 <p>What we want in return is the value for <code>attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec</code>. This gives us the <code>id</code> for the collection timetable, which we retrieve by hitting an endpoint <em>containing</em> that timetable <code>id</code> For instance:</p>
@@ -229,14 +254,10 @@
 <p>It seems like there are lots of unnecessary requests in this flow. But who knows; I'm not one to tell developers how to do their jobs!</p>
 <p>Anyways, we've finally got what we want: the collection timetables for each waste service. But how to use that data to send alerts?</p>
 <hr>
-<h2>Setting up a Cron Job to send bin-collection alerts</h2>
+<h2 id="setting-up-a-cron-job-to-send-bin-collection-alerts">Setting up a Cron Job to send bin-collection alerts</h2>
 <p>I scratched my head about this one for a while as well.</p>
 <p>I settled on the solution of running a daily script as a <a href="https://ostechnix.com/a-beginners-guide-to-cron-jobs/">Cron Job</a> - basically a scheduled command - that loops through each timetable, subtracting every date listed from the present date. If the difference equals 1, the collection is the following day:</p>
-<div class="highlight"><pre><span></span><code><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">The code in the script doesn&#39;t look quite like this, but the principles are the same.</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="n">collection_is_due_tomorrow</span> <span class="o">=</span> <span class="p">[]</span>
-
+<div class="highlight"><pre><span></span><code><span class="n">collection_is_due_tomorrow</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># looping through the timetable, getting the difference between today&#39;s date and the date in that iteration of the loop</span>
     <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">timetable</span><span class="p">:</span>
 
@@ -252,17 +273,17 @@
 <p>[email screenshot placeholder]</p>
 <p>And that's it! The Bin Bot's got us covered.</p>
 <hr>
-<h2>Learnings</h2>
+<h2 id="learnings">Learnings</h2>
 <p>I've done a bit of web scraping before, but this was the first time I tried to circumvent the front-end and go straight to the network requests to get the data I was after. So I'm definitely no expert. But I learned a fair bit from this exercise that'll hopefully serve me well in the future.</p>
-<h4>1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.</h4>
+<h3 id="1-use-a-text-comparison-tool-to-tease-out-which-bits-of-request-bodies-responses-are-important">1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.</h3>
 <p>At first, I was slightly overwhelmed by the JSON I was sending and receiving. I couldn't work out which bits mattered, and which stayed the same no matter what address I was using. Text Compare tools could help me isolate the important variables.</p>
 <p>Take these two identical looking <code>POST</code>-request bodies:</p>
 <p>[ text compare image placeholder]</p>
 <p>Highlighted in blue, the only thing that is different between them is that very last value. From that, I know that bit of information is important, and likely explains why I get two different responses. You can use that approach with any two requests that look similar to zero in on the information that the server really needs.</p>
-<h4>2. Throttle DevTools to slow a series of requests down.</h4>
+<h3 id="2-throttle-devtools-to-slow-a-series-of-requests-down">2. Throttle DevTools to slow a series of requests down.</h3>
 <p>Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:</p>
 <p>[throttling screenshot]</p>
-<h4>3. If you can't work it out, step away and do something else.</h4>
+<h3 id="3-if-you-cant-work-it-out-step-away-and-do-something-else">3. If you can't work it out, step away and do something else.</h3>
 <p>I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.</p>
 <hr>
 <p><em>P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it🙃</em></p>
