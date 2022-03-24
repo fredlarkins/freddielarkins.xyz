@@ -37,13 +37,13 @@ LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
           ('linkedin', 'https://www.linkedin.com/in/freddielarkins/'),)
 
-DEFAULT_PAGINATION = 3
+DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
 # theme specific stuff: Flex
-THEME = 'themes/Flex-modified'
+THEME = 'themes/Flex-fredlarkins-modified'
 # THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
@@ -64,6 +64,12 @@ SITEMAP = {
     }
 }
 
+PLUGIN_PATHS = ['plugins']
+
+PLUGINS = ['post_stats']
+
+
+
 CC_LICENSE = {
     "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
     "version": "4.0",
@@ -73,3 +79,21 @@ CC_LICENSE = {
 }
 
 COPYRIGHT_YEAR = datetime.now().strftime('%B %Y') # and month, technically
+
+'''
+Settings taken from from https://cloudbytes.dev/snippets/add-a-table-of-contents-using-markdown-in-pelican
+NOTE: keep an eye on this extension - a load of stuff broke when I commented out stuff
+Docs for extension: https://python-markdown.github.io/extensions/toc/
+'''
+
+MARKDOWN = {
+    "extension_configs": {
+        # Needed for code syntax highlighting
+        "markdown.extensions.codehilite": {"css_class": "highlight"},
+        "markdown.extensions.extra": {},
+        "markdown.extensions.meta": {},
+        # This is for enabling the TOC generation
+        "markdown.extensions.toc": {"title": None},
+    },
+    "output_format": "html5",
+}

@@ -1,0 +1,6 @@
+{% extends "index.html" %}
+
+<!-- removing em dash, adding pipe -->
+<!-- tinkering with meta title format -->
+{% block title %}{{ _('All articles tagged with "%(name)s"', name=tag) }} | {% endblock %}
+{% set summarise = True %}

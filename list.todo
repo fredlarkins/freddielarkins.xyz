@@ -7,10 +7,30 @@ Security:
     ✔ How to get SSL certificates @done (22/03/2022, 12:47:09)
 
 Long term:
-    ☐ Page showing log requests (iframe)
-    ☐ Page showing top-level pi-hole stats
-    ☐ Linux command log - every command I use, create an entry explaining what it does
-    ☐ Server status page? (https://httpd.apache.org/docs/2.4/mod/mod_status.html)
+    ✔ Server status page? (https://httpd.apache.org/docs/2.4/mod/mod_status.html) @done (23/03/2022, 11:32:24)
 
 Rsyc:
-    ☐ Learn how to use and set up
+    ✔ Learn how to use and set up @done (23/03/2022, 11:02:59)
+
+Pages:
+    ☐ Custom 404 page (see notes)
+    ☐ Googlebot requests
+    ☐ How I built this site / useful resources
+    ☐ Linux command log
+    ☐ Pi-hole stats
+    ☐ Server status with non-sensitive info?
+
+Schema:
+    ✔ Person Schema on about me @done (23/03/2022, 11:45:53)
+
+Articles:
+    ☐ Bin bot article @today 
+    ☐ Drop shadow API
+
+Plugins:
+    ☐ Create branch to experiment with plugins
+    ☐ Image optimiser plug in
+    ☐ SEO plugin?
+
+Experiments:
+    ☐ Cloudflare API stats?

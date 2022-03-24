@@ -12,6 +12,21 @@ I'm a London-based SEO, currently working for Zoopla. I've been in digital marke
 My journey began with me [presenting a virtual open day](https://www.facebook.com/unibirmingham/videos/10155811010908608 "Facebook video of me giving a campus tour for the University of Birmingham's virtual open day in 2017") at the Uni of Birmingham (`cringe warning`: watch at your peril) - fast forward a few internships, a few jobs and now we're here!
 
 I'll be honest; I've never really done personal blogging before. This blog is an attempt to put to (virtual) paper all the useful stuff I pick up along my SEO journey (and hopefully a bit of Python, too).
+```json
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Freddie Larkins",
+  "url": "https://freddielarkins.xyz",
+  "image": "https://freddielarkins.xyz/theme/img/profile.png",
+  "sameAs": "https://www.linkedin.com/in/freddielarkins/",
+  "jobTitle": "Senior SEO Analyst",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Zoopla"
+  }  
+}
+```
 
 * * *
 
@@ -68,3 +83,19 @@ Some vaguely interesting things about me
 <center>_A welcome distraction._</center>
 
 **Thanks for stopping by.**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Freddie Larkins",
+  "url": "https://freddielarkins.xyz",
+  "image": "https://freddielarkins.xyz/theme/img/profile.png",
+  "sameAs": "https://www.linkedin.com/in/freddielarkins/",
+  "jobTitle": "Senior SEO Analyst",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Zoopla"
+  }  
+}
+</script>

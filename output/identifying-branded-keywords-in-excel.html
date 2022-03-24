@@ -31,25 +31,24 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
         disabled="disabled"
-    href="https://freddielarkins.xyz/theme/stylesheet/dark-theme.min.css">
+    href="./theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
             disabled="disabled"
-          href="https://freddielarkins.xyz/theme/pygments/monokai.min.css">
+          href="./theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="https://freddielarkins.xyz/theme/pygments/github.min.css">
+          href="./theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
 
 
-    <link href="https://freddielarkins.xyz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freddie's SEO Blog :// Atom">
 
 
 
@@ -67,11 +66,11 @@
   <meta property="og:title" content="Identifying branded keywords in Excel"/>
   <meta property="og:description" content="It’s always helpful to identify branded terms when you’re dealing with a list of keywords. Filtering them out gives you a view on non-branded performance and potential areas of improvement."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://freddielarkins.xyz/identifying-branded-keywords-in-excel.html"/>
+  <meta property="og:url" content="./identifying-branded-keywords-in-excel.html"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2022-03-20 15:59:00+00:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://freddielarkins.xyz/author/freddie-larkins.html">
+  <meta property="article:author" content="./author/freddie-larkins.html">
   <meta property="article:section" content="SEO"/>
   <meta property="article:tag" content="Excel"/>
   <meta property="og:image" content="">
@@ -82,12 +81,12 @@
 <body class="light-theme">
   <aside>
     <div>
-      <a href="https://freddielarkins.xyz/">
-        <img src="https://freddielarkins.xyz/theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
+      <a href="./">
+        <img src="./theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
       </a>
 
       <h1>
-        <a href="https://freddielarkins.xyz/">Freddie Larkins</a>
+        <a href="./">Freddie Larkins</a>
       </h1>
 
 <p>SEO, Python and other stuff.</p>
@@ -132,27 +131,44 @@
       
     <h1 id="identifying-branded-keywords-in-excel">Identifying branded keywords in Excel</h1>
     <p>
-      Posted on Sun 20 March 2022 in <a href="https://freddielarkins.xyz/category/seo.html">SEO</a>
+      Posted on Sun 20 March 2022 in <a href="./category/seo.html">SEO</a>
 
+      <!-- My addition - adding a different read-time plugin to the article template -->
+      <!--  -->
+
+        &#8226; 2 min read
     </p>
   </header>
 
 
   <div>
     <p><strong>Any large-scale analysis of a group of keywords is always enhanced by identifying branded and non-branded keywords. Thankfully, it's simple to do in Excel.</strong></p>
-<h2>The formula</h2>
+<hr>
+<div class="toc">
+<ul>
+<li><a href="#the-formula">The formula</a></li>
+<li><a href="#how-it-works">How it works</a><ul>
+<li><a href="#the-search-function">The SEARCH function</a></li>
+<li><a href="#the-isnumber-function">The ISNUMBER function</a></li>
+<li><a href="#the-if-function">The IF function</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="the-formula">The formula</h2>
 <p>Assuming your keywords are in column A, this formula should do the trick:</p>
 <div class="highlight"><pre><span></span><code><span class="o">=</span><span class="k">IF</span><span class="ss">(</span><span class="nv">ISNUMBER</span><span class="ss">(</span><span class="nv">SEARCH</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">BRANDNAME</span><span class="s2">&quot;</span>,<span class="nv">A2</span><span class="ss">))</span>,<span class="s2">&quot;</span><span class="s">Branded</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">Non-branded</span><span class="s2">&quot;</span><span class="ss">)</span>
 </code></pre></div>
 
 <p>Just replace <code>BRANDNAME</code> with the brand that you’re working, copy and paste the formula into Excel and apply it to the entire column of keywords. That’ll give you a column with either a 'Branded' or 'Non-branded' value for each keyword.</p>
-<h2>How it works</h2>
+<h2 id="how-it-works">How it works</h2>
 <p>Let’s break down each part of the formula, working inside out. We’ll use an example set of Nike keywords to illustrate each step.</p>
-<h3>The SEARCH function</h3>
+<h3 id="the-search-function">The SEARCH function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-search-function">SEARCH function</a> looks for the provided string of text inside another <a href="https://www.deskbright.com/excel/excel-string-functions/">string</a> of text, returning the position of the first character in the case of a match. It’s not case sensitive. In our case, <code>=SEARCH("nike",A2)</code> is asking Excel to look for the text “nike” inside our keyword text string.</p>
 <p><img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function to a set of keywords." src="/images/search-function-screenshot.png"></p>
 <p>If it is present, the formula will return the position of the “n” in “nike”. If it is not present, the formula will evaluate as a #VALUE! error.</p>
-<h3>The ISNUMBER function</h3>
+<h3 id="the-isnumber-function">The ISNUMBER function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-isnumber-function">ISNUMBER function</a> simply checks that a given cell is a number, returning either TRUE or FALSE. Thus, our formula becomes <code>=ISNUMBER(SEARCH("nike"),A2)</code>:</p>
 <p><img alt="Screenshot of an Excel table demonstrating the application of the SEARCH function in conjunction with ISNUMBER to a set of keywords." src="/images/search-and-isnumber-functions.png"></p>
 <p>By wrapping our <code>SEARCH</code> function with <code>ISNUMBER</code>, we’re converting the output of the former into a Boolean TRUE or FALSE value. In other words:</p>
@@ -161,7 +177,7 @@
 <li>If “nike” is <em>not present</em> in keyword –&gt; <code>SEARCH</code> returns an #VALUE! error –&gt; <code>ISNUMBER</code> evaluates as FALSE</li>
 </ul>
 <p>Essentially, we’re converting the results of <code>SEARCH</code> into something we can use in the final component of the formula, our <code>IF</code> statement.</p>
-<h3>The IF function</h3>
+<h3 id="the-if-function">The IF function</h3>
 <p>The <a href="https://exceljet.net/excel-functions/excel-if-function">IF function</a> uses a logical test to return one value for a TRUE result, and another for FALSE.</p>
 <p>We bring everything together using an <code>IF</code> statement: <code>=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")</code></p>
 <p><img alt="Screenshot of an Excel table showing the full function" src="/images/search-isnumber-and-if-functions.png"></p>
@@ -171,7 +187,7 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://freddielarkins.xyz/tag/excel.html">Excel</a>
+      <a href="./tag/excel.html">Excel</a>
     </p>
   </div>
 
@@ -190,7 +206,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="https://freddielarkins.xyz/theme/dark-theme/dark-theme.min.js"
+          src="./theme/dark-theme/dark-theme.min.js"
           data-enable-auto-detect-theme="false"
           data-default-theme="light"
           type="text/javascript">
@@ -217,7 +233,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Freddie's SEO Blog :// ",
-  "url" : "https://freddielarkins.xyz",
+  "url" : ".",
   "image": "",
   "description": "Home of the ramblings of an SEO currently working for Zoopla."
 }

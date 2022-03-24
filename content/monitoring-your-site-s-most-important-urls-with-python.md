@@ -10,7 +10,12 @@ Slug: monitoring-your-site-s-most-important-urls-with-python
 
 As SEOs, we're precious about our site's traffic - especially when we're losing it! The inspo for this collection of Python scripts arose at work, where I'd noticed a few pieces of traffic-driving bits of content had been accidentally redirected elsewhere, or were stuck in infinite redirect loops. Of course, in both cases, traffic loss was the result.
 
-This [GitHub repo was](https://github.com/fredlarkins/monitor-top-urls) my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check. If you just want to go ahead and try it, run:
+This [GitHub repo was](https://github.com/fredlarkins/monitor-top-urls) my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check.
+
+<div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="400" data-height="" data-theme="default"></div>
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+If you just want to go ahead and try it, run:
 ```
 git clone https://github.com/fredlarkins/monitor-top-urls.git
 ```

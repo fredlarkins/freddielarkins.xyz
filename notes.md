@@ -16,3 +16,16 @@ And then configuring Apache to show this error page:
 >```
 >ErrorDocument 404 /404.html
 >```
+
+
+https://serverfault.com/questions/520195/how-does-servername-and-serveralias-work
+
+https://www.digitalocean.com/community/tutorials/apache-configuration-error-ah00558-could-not-reliably-determine-the-server-s-fully-qualified-domain-name
+
+https://devanswers.co/get-real-client-ip-address-cloudflare-apache-php/
+
+
+https://stackoverflow.com/questions/20929606/what-are-the-numbers-after-the-http-status-codes-in-app-engines-dev-appserver-p
+
+
+https://askubuntu.com/questions/476041/how-do-i-make-rsync-delete-files-that-have-been-deleted-from-the-source-folder

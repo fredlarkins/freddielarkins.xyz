@@ -31,25 +31,24 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
         disabled="disabled"
-    href="https://freddielarkins.xyz/theme/stylesheet/dark-theme.min.css">
+    href="./theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
             disabled="disabled"
-          href="https://freddielarkins.xyz/theme/pygments/monokai.min.css">
+          href="./theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="https://freddielarkins.xyz/theme/pygments/github.min.css">
+          href="./theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
 
 
-    <link href="https://freddielarkins.xyz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freddie's SEO Blog :// Atom">
 
 
 
@@ -67,11 +66,11 @@
   <meta property="og:title" content="Monitoring your site&#39;s most important URLs with Python"/>
   <meta property="og:description" content="I wrote a few Python scripts that monitor your site&#39;s most important URLs for any 4xx and 5xx errors. Here&#39;s how they work."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://freddielarkins.xyz/monitoring-your-site-s-most-important-urls-with-python.html"/>
+  <meta property="og:url" content="./monitoring-your-site-s-most-important-urls-with-python.html"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2022-03-19 15:09:00+00:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://freddielarkins.xyz/author/freddie-larkins.html">
+  <meta property="article:author" content="./author/freddie-larkins.html">
   <meta property="article:section" content="Python"/>
   <meta property="article:tag" content="Search Console API"/>
   <meta property="article:tag" content="aiohttp"/>
@@ -84,12 +83,12 @@
 <body class="light-theme">
   <aside>
     <div>
-      <a href="https://freddielarkins.xyz/">
-        <img src="https://freddielarkins.xyz/theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
+      <a href="./">
+        <img src="./theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
       </a>
 
       <h1>
-        <a href="https://freddielarkins.xyz/">Freddie Larkins</a>
+        <a href="./">Freddie Larkins</a>
       </h1>
 
 <p>SEO, Python and other stuff.</p>
@@ -134,8 +133,12 @@
       
     <h1 id="monitoring-your-site-s-most-important-urls-with-python">Monitoring your site's most important URLs with Python</h1>
     <p>
-      Posted on Sat 19 March 2022 in <a href="https://freddielarkins.xyz/category/python.html">Python</a>
+      Posted on Sat 19 March 2022 in <a href="./category/python.html">Python</a>
 
+      <!-- My addition - adding a different read-time plugin to the article template -->
+      <!--  -->
+
+        &#8226; 4 min read
     </p>
   </header>
 
@@ -143,13 +146,17 @@
   <div>
     <p><strong>I've you've ever discovered a piece of content has been accidentally redirected or removed, this article might be for you.</strong></p>
 <p>As SEOs, we're precious about our site's traffic - especially when we're losing it! The inspo for this collection of Python scripts arose at work, where I'd noticed a few pieces of traffic-driving bits of content had been accidentally redirected elsewhere, or were stuck in infinite redirect loops. Of course, in both cases, traffic loss was the result.</p>
-<p>This <a href="https://github.com/fredlarkins/monitor-top-urls">GitHub repo was</a> my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check. If you just want to go ahead and try it, run:</p>
+<p>This <a href="https://github.com/fredlarkins/monitor-top-urls">GitHub repo was</a> my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check.</p>
+<div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="400" data-height="" data-theme="default"></div>
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+<p>If you just want to go ahead and try it, run:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/fredlarkins/monitor-top-urls.git
 </code></pre></div>
 
 <p>... and follow the README.md for set-up instructions.</p>
 <p>Otherwise, here's how it works in a little more detail.</p>
-<h2>Querying the Search Console API</h2>
+<h2 id="querying-the-search-console-api">Querying the Search Console API</h2>
 <p>The idea behind this project was to only monitor the site's most important URLs for downtime. Therefore, the script queries the Search Console API (GSC API) for a list of the top X URLs (where X is specified by the user when invoking the script) by organic clicks.</p>
 <p>The <code>query()</code> function in <code>query_search_console.py</code> does this job. Using Josh Carty's user-friendly <a href="https://github.com/joshcarty/google-searchconsole">google-searchconsole</a> package, it authenticates to the API with client_secret.json and client_config.json files - downloaded from the Google Developer Console. The important bit of the function is this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">webprop</span><span class="o">.</span><span class="n">query</span>\ <span class="c1"># webprop is a &#39;webproperty&#39; object - just like the properties you see in the GSC GUI</span>
@@ -171,7 +178,7 @@
 </code></pre></div>
 
 <p>Calling <code>query()</code> supplies us with the DataFrame from which we'll get the list of URLs that are checked for errors.</p>
-<h2>Checking the URLs for errors</h2>
+<h2 id="checking-the-urls-for-errors">Checking the URLs for errors</h2>
 <p>The <code>check_urls.py</code> takes care of this part, leveraging the aiohttp library. For an awesome video on using aiohttp to make requests, check out John Watson Rooney's <a href="https://youtu.be/lUwZ9rS0SeM">'Web Scraping with AIOHTTP and Python'</a>.</p>
 <p>There are two really cool things about aiohttp. First, you can make requests asynchronously. aiohttp won't wait for the response from URL X before it requests URL Y - radically speeding up how many requests you can make in a given time period.</p>
 <p>Second, when you call <code>session.get(url)</code> using an <code>aiohttpClientSession</code> object, only the response headers are returned, rather than the full HTML contents. The latter can be obtained via the <code>text()</code> method. It's a lightweight way of getting the information we need; after all, if we only want to know whether the URL is throwing an error or has been redirected, we only need the response codes from the server.</p>
@@ -190,21 +197,21 @@
 
 <p>Notice we're not calling <code>resp.text()</code> at any point, as we don't need the HTML content to ascertain whether the URL is returning a 3xx or 4xx status code.</p>
 <p>Looping through each of the URLs obtained in the previous step, we'll record the URL, status code, error message (if applicable, e.g. in the case of a server error), redirect type, redirect URL and resolved URL. If any URLs throw errors, the user will be emailed in the next step.</p>
-<h2>Emailing the user about errors</h2>
+<h2 id="emailing-the-user-about-errors">Emailing the user about errors</h2>
 <p><code>app.py</code> is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
 <img alt="Screenshot of a warning email" src="/images/errors-detected.png">
 <center><em>Oh no!</em></center></p>
 <p>The emails are sent using the <a href="https://pypi.org/project/yagmail/">yagmail</a> package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!</p>
-<h2>Learnings</h2>
+<h2 id="learnings">Learnings</h2>
 <p>This was the first repo I made public on my GitHub, so it was quite exciting to release. I'm under no illusions that nobody will really use it, but it's a useful exercise to pretend as though people will! That forces you to focus on catching errors and communicating to the user why the script failed.</p>
 <p>Having said that, reading back through my code was a bit of a challenge. It's rather unwieldy and the end result could probably be achieved in one python file rather than several. It would also have been cool to have integrated a means of keeping track of <em>known</em> errors. I noticed that it would remind me every day of the same problem URLs.</p>
 <p>Overall, though, I'm proud of it as my first attempt to give back to the SEO Pythonista community. 3 GitHub stars and counting!</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://freddielarkins.xyz/tag/search-console-api.html">Search Console API</a>
-      <a href="https://freddielarkins.xyz/tag/aiohttp.html">aiohttp</a>
-      <a href="https://freddielarkins.xyz/tag/yagmail.html">yagmail</a>
+      <a href="./tag/search-console-api.html">Search Console API</a>
+      <a href="./tag/aiohttp.html">aiohttp</a>
+      <a href="./tag/yagmail.html">yagmail</a>
     </p>
   </div>
 
@@ -223,7 +230,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="https://freddielarkins.xyz/theme/dark-theme/dark-theme.min.js"
+          src="./theme/dark-theme/dark-theme.min.js"
           data-enable-auto-detect-theme="false"
           data-default-theme="light"
           type="text/javascript">
@@ -250,7 +257,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Freddie's SEO Blog :// ",
-  "url" : "https://freddielarkins.xyz",
+  "url" : ".",
   "image": "",
   "description": "Home of the ramblings of an SEO currently working for Zoopla."
 }
