@@ -29,3 +29,7 @@ https://stackoverflow.com/questions/20929606/what-are-the-numbers-after-the-http
 
 
 https://askubuntu.com/questions/476041/how-do-i-make-rsync-delete-files-that-have-been-deleted-from-the-source-folder
+
+
+This seems to have worked - but why?
+https://apachelounge.com/viewtopic.php?t=8593&view=next
