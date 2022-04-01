@@ -1,10 +1,11 @@
 Title: Building a bin collection reminder bot in Python
-Date: 2022-03-23 09:31
+Date: 2022-04-01 09:31
 Category: Python
 Tags: Requests, JSON
 Author: Freddie Larkins
 Summary: Python is great for automating repetitive tasks, such as checking bin collection. I built a friendly Bin Bot to do just that.
 Slug: building-a-bin-collection-reminder-bot-in-python
+<!--Status: draft-->
 
 **Sunday nights in our house involve a weekly ritual.**
 
@@ -16,7 +17,7 @@ Well, with Python, there is!
 
 Using the [Requests](https://docs.python-requests.org/en/latest/) library, we can mimic the series of http requests that your browser makes when using the HackneyWaste tool...
 
-[gif placeholder]
+![Gif showing the WasteChecker tool in DevTools](images/gifs/hackney-waste-portal.gif)
 
 <center>_Keep your eye on the DevTools panel on the left-hand side. Our precious requests!_</center>
 
@@ -48,11 +49,11 @@ When I first started on this project, I actually set out to build something in S
  
 So, I had to figure out how those series of requests led from this:
 
- [screenshot of start screen]
+![Screenshot of the first screen on the Waste Collection tool](/images/webp/waste-services-screenshot.webp)
 
 To this:
 
-[screenshot of end screen]
+![Screenshot of the final screen of the Waste Collection tool, showing collection dates](/images/webp/hackney-waste-final-screen.webp)
 
 ### Working out how the series of requests fit together
 
@@ -85,7 +86,7 @@ The `itemID` we just obtained is used in the endpoint for this `GET` request:
 
 There is one field in the JSON response that we're interested in: `attributes_wasteContainersAssignableWasteContainers`. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:
 
-[step 1 image placeholder]
+![Diagram of the series of requests made between client and 2x servers](/images/webp/hackney_step_1.webp)
 
 For each value returned, the browser makes a request using the same scheme above (appending the `id` for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:
 ```text
@@ -132,7 +133,7 @@ Rinse and repeat for each waste container  (recycling, food waste etc.) availabl
 
 Represented visually, the flow looks like this:
 
-[step 2 image placeholder]
+![Diagram showing the second series of client/server requests](/images/webp/hackney_bin_service_steps_2-3.webp)
 
 It seems like there are lots of unnecessary requests in this flow. But who knows; I'm not one to tell developers how to do their jobs!
 
@@ -161,7 +162,7 @@ The script composes a simple email including what is due the following day, and 
 
 This is the email I received last Sunday:
 
-[email screenshot placeholder]
+![Screenshot of the email that the Bin Bot sends](/images/webp/bin-bot-email.webp)
 
 And that's it! The Bin Bot's got us covered.
 
@@ -174,17 +175,17 @@ I've done a bit of web scraping before, but this was the first time I tried to c
 
 Take these two identical looking `POST`-request bodies:
  
- [ text compare image placeholder]
+ ![A text compare tool available online](/images/webp/text-compare.webp)
 
 Highlighted in blue, the only thing that is different between them is that very last value. From that, I know that bit of information is important, and likely explains why I get two different responses. You can use that approach with any two requests that look similar to zero in on the information that the server really needs.
 
 ### 2. Throttle DevTools to slow a series of requests down.
 Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:
 
-[throttling screenshot]
+![Location of the 'throttle' feature in DevTools](/images/webp/devtools-throtttling.webp)
 
 ### 3. If you can't work it out, step away and do something else.
 I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.
 
 ---
-*P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it🙃*
+*P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it 🙃*
