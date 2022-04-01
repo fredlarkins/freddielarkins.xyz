@@ -15,7 +15,7 @@ DISPLAY_PAGES_ON_MENU = False
 
 PATH = 'content'
 
-STATIC_PATHS = ['images', 'pdfs']
+STATIC_PATHS = ['images', 'pdfs', 'excel-files']
 
 TIMEZONE = 'Europe/London'
 
