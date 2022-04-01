@@ -31,24 +31,25 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
         disabled="disabled"
-    href="./theme/stylesheet/dark-theme.min.css">
+    href="https://freddielarkins.xyz/theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
             disabled="disabled"
-          href="./theme/pygments/monokai.min.css">
+          href="https://freddielarkins.xyz/theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="./theme/pygments/github.min.css">
+          href="https://freddielarkins.xyz/theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/solid.css">
 
 
+    <link href="https://freddielarkins.xyz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freddie's SEO Blog :// Atom">
 
 
 
@@ -66,11 +67,11 @@
   <meta property="og:title" content="Using Text to Columns to analyse a site&#39;s traffic sources"/>
   <meta property="og:description" content="Excel&#39;s Text to Columns feature is a quick and easy way to segment a list of URLs by subfolder to understand which parts of a site drive organic traffic."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="./using-text-to-columns-to-analyse-a-site-s-traffic-sources.html"/>
+  <meta property="og:url" content="https://freddielarkins.xyz/using-text-to-columns-to-analyse-a-site-s-traffic-sources.html"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2022-03-20 16:23:00+00:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="./author/freddie-larkins.html">
+  <meta property="article:author" content="https://freddielarkins.xyz/author/freddie-larkins.html">
   <meta property="article:section" content="SEO"/>
   <meta property="article:tag" content="Excel"/>
   <meta property="article:tag" content="Text to Columns"/>
@@ -82,12 +83,12 @@
 <body class="light-theme">
   <aside>
     <div>
-      <a href="./">
-        <img src="./theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
+      <a href="https://freddielarkins.xyz/">
+        <img src="https://freddielarkins.xyz/theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
       </a>
 
       <h1>
-        <a href="./">Freddie Larkins</a>
+        <a href="https://freddielarkins.xyz/">Freddie Larkins</a>
       </h1>
 
 <p>SEO, Python and other stuff.</p>
@@ -132,7 +133,7 @@
       
     <h1 id="using-text-to-columns-to-analyse-a-site-s-traffic-sources">Using Text to Columns to analyse a site's traffic sources</h1>
     <p>
-      Posted on Sun 20 March 2022 in <a href="./category/seo.html">SEO</a>
+      Posted on Sun 20 March 2022 in <a href="https://freddielarkins.xyz/category/seo.html">SEO</a>
 
       <!-- My addition - adding a different read-time plugin to the article template -->
       <!--  -->
@@ -149,20 +150,20 @@
 <p>I've used an Ahrefs export for <a href="https://www.hubspot.com/">HubSpot</a> for this demo, but you can use Text to Columns for any dataset containing URLs or URL paths.</p>
 <h3 id="1-format-your-data-as-a-table">1) Format your data as a table</h3>
 <p>Highlight your dataset with <code>CTRL+A</code> and convert it into a table with CTRL+T.</p>
-<p><img alt="Screenshot of the 'Create Table' pop-up" src="/images/create-table.png"></p>
+<p><img alt="Screenshot of the 'Create Table' pop-up" src="/images/png/create-table.png"></p>
 <p>(This step is optional – I find it makes the data easier to work with.)</p>
 <h3 id="2-split-out-the-urls-using-text-to-columns">2) Split out the URLs using Text to Columns</h3>
 <p>Highlight the column containing your URLs. In the top Ribbon, click on <code>Data</code> &gt; <code>Text to Columns</code>.</p>
-<p><img alt="Screenshot of the location of the Text to Columns button in Excel" src="/images/text-to-columns-location.png"></p>
+<p><img alt="Screenshot of the location of the Text to Columns button in Excel" src="/images/png/text-to-columns-location.png"></p>
 <p>That'll bring up the Text to Columns Wizard. We'll run through the steps carefully to get the desired output.</p>
 <p><strong>Step 1:</strong> leave the Wizard as is and hit <code>Next &gt;</code>.</p>
-<p><img alt="Screenshot showing step 1 of the Text to Columns Wizard" src="/images/text-to-columns-wizard-screenshot-step-1.png"></p>
+<p><img alt="Screenshot showing step 1 of the Text to Columns Wizard" src="/images/png/text-to-columns-wizard-screenshot-step-1.png"></p>
 <p>The option to split our text (the URLs) by a delimiter – i.e. a specified text character – is selected by default.</p>
 <p><strong>Step 2:</strong> uncheck the default delimiter (Tab) and enter a forward slash in the <code>Other:</code> input box.</p>
-<p><img alt="Screenshot showing step 2 of the Text to Columns Wizard" src="/images/text-to-columns-wizard-screenshot-step-2.png"></p>
+<p><img alt="Screenshot showing step 2 of the Text to Columns Wizard" src="/images/png/text-to-columns-wizard-screenshot-step-2.png"></p>
 <p>This tells the Text to Columns wizard to look for forward slashes as a way of 'splitting up' your URLs. You can also check <code>Treat consecutive delimiters as one</code> to avoid an empty output column for the second slash in 'https:/<strong>/</strong>'.</p>
 <p><strong>Step 3:</strong> select where the output will go.</p>
-<p><img alt="Screenshot of step 3 of the Text to Columns wizard" src="/images/text-to-columns-wizard-screenshot-step-3.png"></p>
+<p><img alt="Screenshot of step 3 of the Text to Columns wizard" src="/images/png/text-to-columns-wizard-screenshot-step-3.png"></p>
 <p>Choose the first cell in the first empty column next to your table. <em>Beware:</em> if you proceed with Excel's default selection for the Destination cell, the newly-generated columns will overwrite whatever data you have in the columns to the right of your URLs.</p>
 <p>And we're done!</p>
 <p>I like to rename my columns to make analysis a little easier.</p>
@@ -173,21 +174,21 @@
 <p><strong>The majority of traffic goes to HubSpot's blog subdomain</strong></p>
 <p>To be precise, Ahrefs estimates that almost 91% of traffic goes to its blog. Kudos to HubSpot's content creation team!</p>
 <p>This pivot chart uses the 'Domain/subdomain' column generated by Text to Columns, aggregating traffic:
-<img alt="Pie chart showing traffic by subdomain" src="/images/traffic-by-subdomain.png"></p>
+<img alt="Pie chart showing traffic by subdomain" src="/images/png/traffic-by-subdomain.png"></p>
 <p><strong>HubSpot's blog traffic is driven by its /marketing/, /sales/ and /website/ subfolders</strong></p>
 <p>This time, we've gone one level deeper to investigate the subfolders within <a href="https://blog.hubspot.com/">https://blog.hubspot.com/</a>. It seems that HubSpot's marketing content drives over half of of all traffic to its blog, followed by its Sales and Webmaster content.</p>
-<p><img alt="Bar chart showing traffic by subfolder within the blog" src="/images/traffic-by-blog-subfolder.png"></p>
+<p><img alt="Bar chart showing traffic by subfolder within the blog" src="/images/png/traffic-by-blog-subfolder.png"></p>
 <p><strong>Almost a quarter of blog traffic is driven by featured snippets</strong></p>
 <p>I've turned this final pivot table into a Bar Graph via <code>Insert</code> &gt; <code>Recommended Charts</code> &gt; <code>Clustered Column</code>. And wow! Almost 25% of the half a million monthly sessions to the blog come via a featured snippet. HubSpot are clearly masters at answering a user's primary question on a topic in a clear and concise manner.</p>
-<p><img alt="Bar chart showing traffic to the blog by SERP feature" src="/images/traffic-by-serp-feature.png">
+<p><img alt="Bar chart showing traffic to the blog by SERP feature" src="/images/png/traffic-by-serp-feature.png">
 <center><em>I get it - I'm terrible at Data Vis</em></center></p>
 <p>There is lots more you can do with this dataset; we haven't even started incorporating keywords into our analysis yet!</p>
-<p>Feel free to <a href="/excel_files/hubspot-t2c-analysis.xlsx">download the Excel spreadsheet</a> used in this tutorial and have a go yourself!</p>
+<p>Feel free to <a href="/excel-files/hubspot-t2c-analysis.xlsx">download the Excel spreadsheet</a> used in this tutorial and have a go yourself!</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="./tag/excel.html">Excel</a>
-      <a href="./tag/text-to-columns.html">Text to Columns</a>
+      <a href="https://freddielarkins.xyz/tag/excel.html">Excel</a>
+      <a href="https://freddielarkins.xyz/tag/text-to-columns.html">Text to Columns</a>
     </p>
   </div>
 
@@ -199,14 +200,14 @@
 
     <footer>
 <p>
-  &copy; March 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; April 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>
 Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="./theme/dark-theme/dark-theme.min.js"
+          src="https://freddielarkins.xyz/theme/dark-theme/dark-theme.min.js"
           data-enable-auto-detect-theme="false"
           data-default-theme="light"
           type="text/javascript">
@@ -233,7 +234,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Freddie's SEO Blog :// ",
-  "url" : ".",
+  "url" : "https://freddielarkins.xyz",
   "image": "",
   "description": "Home of the ramblings of an SEO currently working for Zoopla."
 }

@@ -1,13 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Freddie's SEO Blog :// - Python</title><link href="https://freddielarkins.xyz/" rel="alternate"></link><link href="https://freddielarkins.xyz/feeds/python.atom.xml" rel="self"></link><id>https://freddielarkins.xyz/</id><updated>2022-03-19T15:09:00+00:00</updated><subtitle>SEO, Python and other stuff.</subtitle><entry><title>Monitoring your site's most important URLs with Python</title><link href="https://freddielarkins.xyz/monitoring-your-site-s-most-important-urls-with-python.html" rel="alternate"></link><published>2022-03-19T15:09:00+00:00</published><updated>2022-03-19T15:09:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-19:/monitoring-your-site-s-most-important-urls-with-python.html</id><summary type="html">&lt;p&gt;I wrote a few Python scripts that monitor your site's most important URLs for any 4xx and 5xx errors. Here's how they work.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;I've you've ever discovered a piece of content has been accidentally redirected or removed, this article might be for you.&lt;/strong&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Freddie's SEO Blog :// - Python</title><link href="https://freddielarkins.xyz/" rel="alternate"></link><link href="https://freddielarkins.xyz/feeds/python.atom.xml" rel="self"></link><id>https://freddielarkins.xyz/</id><updated>2022-04-01T09:31:00+01:00</updated><subtitle>SEO, Python and other stuff.</subtitle><entry><title>Building a bin collection reminder bot in Python</title><link href="https://freddielarkins.xyz/building-a-bin-collection-reminder-bot-in-python.html" rel="alternate"></link><published>2022-04-01T09:31:00+01:00</published><updated>2022-04-01T09:31:00+01:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-04-01:/building-a-bin-collection-reminder-bot-in-python.html</id><summary type="html">&lt;p&gt;Python is great for automating repetitive tasks, such as checking bin collection. I built a friendly Bin Bot to do just that.&lt;/p&gt;</summary><content type="html">&lt;!--Status: draft--&gt;
+
+&lt;p&gt;&lt;strong&gt;Sunday nights in our house involve a weekly ritual.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First, we remember bins are due the following morning. Second, we realise we've forgotten what was collected the previous week. Third, we check the council's &lt;a href="https://hackney-waste-pages.azurewebsites.net/"&gt;HackneyWaste bin-checker tool&lt;/a&gt; to see what bins are due.&lt;/p&gt;
+&lt;p&gt;What if there was a better way?&lt;/p&gt;
+&lt;p&gt;Well, with Python, there is!&lt;/p&gt;
+&lt;p&gt;Using the &lt;a href="https://docs.python-requests.org/en/latest/"&gt;Requests&lt;/a&gt; library, we can mimic the series of http requests that your browser makes when using the HackneyWaste tool...&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Gif showing the WasteChecker tool in DevTools" src="images/gifs/hackney-waste-portal.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;em&gt;Keep your eye on the DevTools panel on the left-hand side. Our precious requests!&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;...and we can get all the data you see rendered in your browser in JSON. We can use that data to send automatic reminders for what bins are being collected, alleviating the need to repeat the aforementioned ritual. Neat!&lt;/p&gt;
+&lt;p&gt;You can check out the repo below:&lt;/p&gt;
+&lt;div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="400" data-height="" data-theme="default"&gt;&lt;/div&gt;
+&lt;script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;I'll run through some of the interesting challenges I when building the bot.&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#challenges"&gt;Challenges&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#working-out-how-the-series-of-requests-fit-together"&gt;Working out how the series of requests fit together&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1-sending-a-postcode-choosing-address"&gt;1. Sending a postcode / choosing address&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-retrieving-the-bin-collection-services-for-the-address"&gt;2. Retrieving the bin collection services for the address&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-retrieving-the-collection-schedules-for-each-waste-service"&gt;3. Retrieving the collection schedules for each waste service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#setting-up-a-cron-job-to-send-bin-collection-alerts"&gt;Setting up a Cron Job to send bin-collection alerts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#learnings"&gt;Learnings&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1-use-a-text-comparison-tool-to-tease-out-which-bits-of-request-bodies-responses-are-important"&gt;1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-throttle-devtools-to-slow-a-series-of-requests-down"&gt;2. Throttle DevTools to slow a series of requests down.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-if-you-cant-work-it-out-step-away-and-do-something-else"&gt;3. If you can't work it out, step away and do something else.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2 id="challenges"&gt;Challenges&lt;/h2&gt;
+&lt;p&gt;When I first started on this project, I actually set out to build something in Selenium. I'd load up the HackneyWaste tool the in a headless browser and use a mixture of &lt;code&gt;browser.find_element()&lt;/code&gt; the &lt;code&gt;browser.send_keys()&lt;/code&gt; to run through the same flow that a real user would:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Input postcode&lt;/li&gt;
+&lt;li&gt;Hit Enter on &lt;button&gt;Search for your address&lt;/button&gt;&lt;/li&gt;
+&lt;li&gt;Select address from dropdown&lt;/li&gt;
+&lt;li&gt;Hit Enter on &lt;button&gt;Go&lt;/button&gt;&lt;/li&gt;
+&lt;li&gt;Scrape the resulting bin collection data using BeautifulSoup&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;However, I didn't feel that would really teach me much about how the application worked. Nor would I gain any experience in scraping data from the backend - as it were - rather than the frontend.&lt;/p&gt;
+&lt;p&gt;So, I had to figure out how those series of requests led from this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the first screen on the Waste Collection tool" src="/images/webp/waste-services-screenshot.webp"&gt;&lt;/p&gt;
+&lt;p&gt;To this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the final screen of the Waste Collection tool, showing collection dates" src="/images/webp/hackney-waste-final-screen.webp"&gt;&lt;/p&gt;
+&lt;h3 id="working-out-how-the-series-of-requests-fit-together"&gt;Working out how the series of requests fit together&lt;/h3&gt;
+&lt;p&gt;I've no shame in admitting it took me a while to get this right! &lt;/p&gt;
+&lt;p&gt;I figured it would make sense to run through the flow as a user would, seeing which requests pertain to each step in the flow.&lt;/p&gt;
+&lt;h4 id="1-sending-a-postcode-choosing-address"&gt;1. Sending a postcode / choosing address&lt;/h4&gt;
+&lt;p&gt;The first couple of requests are &lt;code&gt;POST&lt;/code&gt; requests to the first server, &lt;code&gt;18.169.89.254&lt;/code&gt;. It receives the user's postcode and returns the street addresses for the user to select. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;CTRL-F&lt;/code&gt; was by best friend here: I could see that the postcode was buried deep in the request body. When testing this first step with other postcodes, I could see that nothing else changed in the lines and lines of JSON - just the postcode.&lt;/p&gt;
+&lt;p&gt;The response contains data for each of the addresses, such as street address and Basic Land and Property Unit class codes (I had to Google what those were - &lt;em&gt;tl;dr&lt;/em&gt; they're not relevant for bin collections).&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;relevant&lt;/em&gt; bit of information for each property is the &lt;code&gt;itemId&lt;/code&gt;. This alphanumeric code uniquely identifies each property:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;itemId: &amp;quot;5f898d4790478c0067f8c316&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The user selects their address from the dropdown list; the application then uses that home's &lt;code&gt;itemId&lt;/code&gt; in the next request to a second server, &lt;code&gt;3.10.72.124&lt;/code&gt;, to query what bin collections apply to that property.&lt;/p&gt;
+&lt;h4 id="2-retrieving-the-bin-collection-services-for-the-address"&gt;2. Retrieving the bin collection services for the address&lt;/h4&gt;
+&lt;p&gt;The next request is a &lt;code&gt;GET&lt;/code&gt; request to server 2 (used for all subsequent requests), asking for the bin collection services applicable to that specific address. Not all addresses in Hackney have collections, and collection days vary by street. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;itemID&lt;/code&gt; we just obtained is used in the endpoint for this &lt;code&gt;GET&lt;/code&gt; request:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://api.uk.alloyapp.io/api/item/&lt;b&gt;5f898d4790478c0067f8c318&lt;/b&gt;?token=67ad2108-dd2b-407a-849a-411a15adf0b1&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is one field in the JSON response that we're interested in: &lt;code&gt;attributes_wasteContainersAssignableWasteContainers&lt;/code&gt;. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Diagram of the series of requests made between client and 2x servers" src="/images/webp/hackney_step_1.webp"&gt;&lt;/p&gt;
+&lt;p&gt;For each value returned, the browser makes a request using the same scheme above (appending the &lt;code&gt;id&lt;/code&gt; for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;5fa55c586b4fb500650caf08 ---&amp;gt; Recycling Sack
+5faea1a108c64000672a88fe ---&amp;gt; Food Caddy (Small)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And so on.&lt;/p&gt;
+&lt;h4 id="3-retrieving-the-collection-schedules-for-each-waste-service"&gt;3. Retrieving the collection schedules for each waste service&lt;/h4&gt;
+&lt;p&gt;This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.&lt;/p&gt;
+&lt;p&gt;The browser makes a &lt;code&gt;POST&lt;/code&gt; request for each &lt;code&gt;id&lt;/code&gt;  obtained above.&lt;/p&gt;
+&lt;p&gt;What we want in return is the value for &lt;code&gt;attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec&lt;/code&gt;. This gives us the &lt;code&gt;id&lt;/code&gt; for the collection timetable, which we retrieve by hitting an endpoint &lt;em&gt;containing&lt;/em&gt; that timetable &lt;code&gt;id&lt;/code&gt; For instance:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;5fa55c586b4fb500650caf08    # the id for Recycling Sack
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Gives us:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;workflows_testWorkflowRoundM1Mon_5f8dea39e27d98006789b99f   # the id for the recycling collection schedule
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Incorporating the above &lt;code&gt;id&lt;/code&gt; in the endpoint for our &lt;code&gt;GET&lt;/code&gt; request gives us:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://api.uk.alloyapp.io/api/workflow/&lt;b&gt;workflows_testWorkflowRoundM1Mon_5f8dea39e27d98006789b99f&lt;/b&gt;?token=67ad2108-dd2b-407a-849a-411a15adf0b1&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;...which returns a JSON response with the timetable for that waste container:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;workflow&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;workflow&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Workflow_Round Mon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;enabled&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;trigger&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;dates&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;2020-04-13T00:00:00.000Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// our timetable data&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;2020-04-20T00:00:00.000Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;2020-04-27T00:00:00.000Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="p"&gt;...&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;2024-01-01T01:01:00.000Z&amp;quot;&lt;/span&gt;
+                    &lt;span class="p"&gt;],&lt;/span&gt;
+&lt;span class="c1"&gt;// and lots of other superfluous json...     &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Rinse and repeat for each waste container  (recycling, food waste etc.) available for that address.&lt;/p&gt;
+&lt;p&gt;Represented visually, the flow looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Diagram showing the second series of client/server requests" src="/images/webp/hackney_bin_service_steps_2-3.webp"&gt;&lt;/p&gt;
+&lt;p&gt;It seems like there are lots of unnecessary requests in this flow. But who knows; I'm not one to tell developers how to do their jobs!&lt;/p&gt;
+&lt;p&gt;Anyways, we've finally got what we want: the collection timetables for each waste service. But how to use that data to send alerts?&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="setting-up-a-cron-job-to-send-bin-collection-alerts"&gt;Setting up a Cron Job to send bin-collection alerts&lt;/h2&gt;
+&lt;p&gt;I scratched my head about this one for a while as well.&lt;/p&gt;
+&lt;p&gt;I settled on the solution of running a daily script as a &lt;a href="https://ostechnix.com/a-beginners-guide-to-cron-jobs/"&gt;Cron Job&lt;/a&gt; - basically a scheduled command - that loops through each timetable, subtracting every date listed from the present date. If the difference equals 1, the collection is the following day:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;collection_is_due_tomorrow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="c1"&gt;# looping through the timetable, getting the difference between today&amp;#39;s date and the date in that iteration of the loop&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;timetable&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# if it&amp;#39;s the day before collection is due, this value will equal 1&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;days&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# append the waste container to the &amp;#39;collection_is_due_tomorrow&amp;#39; list&lt;/span&gt;
+            &lt;span class="n"&gt;collection_is_due_tomorrow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;waste_container&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The script composes a simple email including what is due the following day, and sends it to the email addresses provided when running &lt;code&gt;check-bins.py&lt;/code&gt; for the first time.&lt;/p&gt;
+&lt;p&gt;This is the email I received last Sunday:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the email that the Bin Bot sends" src="/images/webp/bin-bot-email.webp"&gt;&lt;/p&gt;
+&lt;p&gt;And that's it! The Bin Bot's got us covered.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="learnings"&gt;Learnings&lt;/h2&gt;
+&lt;p&gt;I've done a bit of web scraping before, but this was the first time I tried to circumvent the front-end and go straight to the network requests to get the data I was after. So I'm definitely no expert. But I learned a fair bit from this exercise that'll hopefully serve me well in the future.&lt;/p&gt;
+&lt;h3 id="1-use-a-text-comparison-tool-to-tease-out-which-bits-of-request-bodies-responses-are-important"&gt;1. Use a Text Comparison tool to tease out which bits of request bodies / responses are important.&lt;/h3&gt;
+&lt;p&gt;At first, I was slightly overwhelmed by the JSON I was sending and receiving. I couldn't work out which bits mattered, and which stayed the same no matter what address I was using. Text Compare tools could help me isolate the important variables.&lt;/p&gt;
+&lt;p&gt;Take these two identical looking &lt;code&gt;POST&lt;/code&gt;-request bodies:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A text compare tool available online" src="/images/webp/text-compare.webp"&gt;&lt;/p&gt;
+&lt;p&gt;Highlighted in blue, the only thing that is different between them is that very last value. From that, I know that bit of information is important, and likely explains why I get two different responses. You can use that approach with any two requests that look similar to zero in on the information that the server really needs.&lt;/p&gt;
+&lt;h3 id="2-throttle-devtools-to-slow-a-series-of-requests-down"&gt;2. Throttle DevTools to slow a series of requests down.&lt;/h3&gt;
+&lt;p&gt;Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Location of the 'throttle' feature in DevTools" src="/images/webp/devtools-throtttling.webp"&gt;&lt;/p&gt;
+&lt;h3 id="3-if-you-cant-work-it-out-step-away-and-do-something-else"&gt;3. If you can't work it out, step away and do something else.&lt;/h3&gt;
+&lt;p&gt;I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it 🙃&lt;/em&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Requests"></category><category term="JSON"></category></entry><entry><title>Monitoring your site's most important URLs with Python</title><link href="https://freddielarkins.xyz/monitoring-your-site-s-most-important-urls-with-python.html" rel="alternate"></link><published>2022-03-19T15:09:00+00:00</published><updated>2022-03-19T15:09:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-19:/monitoring-your-site-s-most-important-urls-with-python.html</id><summary type="html">&lt;p&gt;I wrote a few Python scripts that monitor your site's most important URLs for any 4xx and 5xx errors. Here's how they work.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;I've you've ever discovered a piece of content has been accidentally redirected or removed, this article might be for you.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;As SEOs, we're precious about our site's traffic - especially when we're losing it! The inspo for this collection of Python scripts arose at work, where I'd noticed a few pieces of traffic-driving bits of content had been accidentally redirected elsewhere, or were stuck in infinite redirect loops. Of course, in both cases, traffic loss was the result.&lt;/p&gt;
-&lt;p&gt;This &lt;a href="https://github.com/fredlarkins/monitor-top-urls"&gt;GitHub repo was&lt;/a&gt; my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check. If you just want to go ahead and try it, run:&lt;/p&gt;
+&lt;p&gt;This &lt;a href="https://github.com/fredlarkins/monitor-top-urls"&gt;GitHub repo was&lt;/a&gt; my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check.&lt;/p&gt;
+&lt;div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="400" data-height="" data-theme="default"&gt;&lt;/div&gt;
+&lt;script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;If you just want to go ahead and try it, run:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone https://github.com/fredlarkins/monitor-top-urls.git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;... and follow the README.md for set-up instructions.&lt;/p&gt;
 &lt;p&gt;Otherwise, here's how it works in a little more detail.&lt;/p&gt;
-&lt;h2&gt;Querying the Search Console API&lt;/h2&gt;
+&lt;h2 id="querying-the-search-console-api"&gt;Querying the Search Console API&lt;/h2&gt;
 &lt;p&gt;The idea behind this project was to only monitor the site's most important URLs for downtime. Therefore, the script queries the Search Console API (GSC API) for a list of the top X URLs (where X is specified by the user when invoking the script) by organic clicks.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;query()&lt;/code&gt; function in &lt;code&gt;query_search_console.py&lt;/code&gt; does this job. Using Josh Carty's user-friendly &lt;a href="https://github.com/joshcarty/google-searchconsole"&gt;google-searchconsole&lt;/a&gt; package, it authenticates to the API with client_secret.json and client_config.json files - downloaded from the Google Developer Console. The important bit of the function is this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;webprop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;\ &lt;span class="c1"&gt;# webprop is a &amp;#39;webproperty&amp;#39; object - just like the properties you see in the GSC GUI&lt;/span&gt;
@@ -29,7 +178,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Calling &lt;code&gt;query()&lt;/code&gt; supplies us with the DataFrame from which we'll get the list of URLs that are checked for errors.&lt;/p&gt;
-&lt;h2&gt;Checking the URLs for errors&lt;/h2&gt;
+&lt;h2 id="checking-the-urls-for-errors"&gt;Checking the URLs for errors&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;check_urls.py&lt;/code&gt; takes care of this part, leveraging the aiohttp library. For an awesome video on using aiohttp to make requests, check out John Watson Rooney's &lt;a href="https://youtu.be/lUwZ9rS0SeM"&gt;'Web Scraping with AIOHTTP and Python'&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are two really cool things about aiohttp. First, you can make requests asynchronously. aiohttp won't wait for the response from URL X before it requests URL Y - radically speeding up how many requests you can make in a given time period.&lt;/p&gt;
 &lt;p&gt;Second, when you call &lt;code&gt;session.get(url)&lt;/code&gt; using an &lt;code&gt;aiohttpClientSession&lt;/code&gt; object, only the response headers are returned, rather than the full HTML contents. The latter can be obtained via the &lt;code&gt;text()&lt;/code&gt; method. It's a lightweight way of getting the information we need; after all, if we only want to know whether the URL is throwing an error or has been redirected, we only need the response codes from the server.&lt;/p&gt;
@@ -48,12 +197,12 @@
 
 &lt;p&gt;Notice we're not calling &lt;code&gt;resp.text()&lt;/code&gt; at any point, as we don't need the HTML content to ascertain whether the URL is returning a 3xx or 4xx status code.&lt;/p&gt;
 &lt;p&gt;Looping through each of the URLs obtained in the previous step, we'll record the URL, status code, error message (if applicable, e.g. in the case of a server error), redirect type, redirect URL and resolved URL. If any URLs throw errors, the user will be emailed in the next step.&lt;/p&gt;
-&lt;h2&gt;Emailing the user about errors&lt;/h2&gt;
+&lt;h2 id="emailing-the-user-about-errors"&gt;Emailing the user about errors&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;app.py&lt;/code&gt; is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
-&lt;img alt="Screenshot of a warning email" src="/images/errors-detected.png"&gt;
+&lt;img alt="Screenshot of a warning email" src="/images/png/errors-detected.png"&gt;
 &lt;center&gt;&lt;em&gt;Oh no!&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;The emails are sent using the &lt;a href="https://pypi.org/project/yagmail/"&gt;yagmail&lt;/a&gt; package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!&lt;/p&gt;
-&lt;h2&gt;Learnings&lt;/h2&gt;
+&lt;h2 id="learnings"&gt;Learnings&lt;/h2&gt;
 &lt;p&gt;This was the first repo I made public on my GitHub, so it was quite exciting to release. I'm under no illusions that nobody will really use it, but it's a useful exercise to pretend as though people will! That forces you to focus on catching errors and communicating to the user why the script failed.&lt;/p&gt;
 &lt;p&gt;Having said that, reading back through my code was a bit of a challenge. It's rather unwieldy and the end result could probably be achieved in one python file rather than several. It would also have been cool to have integrated a means of keeping track of &lt;em&gt;known&lt;/em&gt; errors. I noticed that it would remind me every day of the same problem URLs.&lt;/p&gt;
 &lt;p&gt;Overall, though, I'm proud of it as my first attempt to give back to the SEO Pythonista community. 3 GitHub stars and counting!&lt;/p&gt;</content><category term="Python"></category><category term="Search Console API"></category><category term="aiohttp"></category><category term="yagmail"></category></entry></feed>
