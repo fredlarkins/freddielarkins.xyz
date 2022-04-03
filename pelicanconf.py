@@ -34,7 +34,7 @@ LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
           ('linkedin', 'https://www.linkedin.com/in/freddielarkins/'),)
 
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 3
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
