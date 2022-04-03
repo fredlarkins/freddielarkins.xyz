@@ -17,9 +17,6 @@ PATH = 'content'
 
 STATIC_PATHS = ['images', 'pdfs', 'excel-files']
 
-TIMEZONE = 'Europe/London'
-
-DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -97,3 +94,10 @@ MARKDOWN = {
     },
     "output_format": "html5",
 }
+
+# language and timezone stuff
+TIMEZONE = 'Europe/London'
+I18N_TEMPLATES_LANG = "en"
+DEFAULT_LANG = "en"
+OG_LOCALE = "en_GB"
+LOCALE = "en_GB"
