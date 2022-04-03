@@ -100,4 +100,4 @@ TIMEZONE = 'Europe/London'
 I18N_TEMPLATES_LANG = "en"
 DEFAULT_LANG = "en"
 OG_LOCALE = "en_GB"
-LOCALE = "en_GB"
+#LOCALE = "en_GB"
