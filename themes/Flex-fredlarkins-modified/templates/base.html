@@ -17,6 +17,29 @@
 
     gtag('config', 'G-7XLXLD52JM');
   </script>
+  <!-- end analytics-->
+
+  <!-- begin open graph tags - via Liz Denys https://lizdenys.com/journal/articles/adding-open-graph-to-pelican.html-->
+  {% if article is defined %}
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
+  <meta property="og:title" content="{{ article.title | replace("\"", "&quot;") }}" />
+  <meta property="og:description" content="{{ article.content | striptags | replace("\"", "&quot;") | truncate(196, False, '...') }}" />
+  <meta property="og:image" content="{{ SITEURL }}/images/og/{% if article.opengraph_image is defined %}{{ article.opengraph_image }}{% else %}opengraph-default.png{% endif %}" />
+  {% elif page is defined %}
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}" />
+  <meta property="og:title" content="{{ SITENAME }} - {{ page.title | replace("\"", "&quot;") }}" />
+  <meta property="og:description" content="{{ page.content | striptags | replace("\"", "&quot;") | truncate(196, False, '...') }}" />
+  <meta property="og:image" content="{{ SITEURL }}/images/og/{% if page.opengraph_image is defined %}{{ page.opengraph_image }}{% else %}opengraph-default.png{% endif %}" />
+  {% else %}
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ SITEURL }}/{{ output_file }}" />
+  <meta property="og:title" content="{{ SITENAME }}" />
+  <meta property="og:description" content="Welcome to my site - SEO, Python and other stuff." />
+  <meta property="og:image" content="{{ SITEURL }}/images/og/opengraph-default.png" />
+  {% endif %}
+  <!-- end open graph tags-->
 
   <!-- adding favicon link tags to the head -->
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
