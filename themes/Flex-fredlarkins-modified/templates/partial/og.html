@@ -12,5 +12,7 @@
   <meta property="og:url" content="{{ SITEURL }}"/>
   {% if SITELOGO %}
   <meta property="og:image" content="{{ SITELOGO }}">
+  {% else %}
+  <meta property="og:image" content="{{ SITEURL }}/images/og/opengraph-default.png"/>
   {% endif %}
 {% endif %}

@@ -1,0 +1,28 @@
+{% if not PLUGINS or 'seo' not in PLUGINS %}
+  {% if OG_LOCALE %}
+    {% set default_locale = OG_LOCALE %}
+  {% else %}
+    {% set default_locale = 'en_US' %}
+  {% endif %}
+
+  <!-- begin open graph tags - via Liz Denys https://lizdenys.com/journal/articles/adding-open-graph-to-pelican.html-->
+  {% if page is defined %}
+  <meta property="og:site_name" content="{{ SITENAME }}"/>
+  <meta property="og:type" content="blog" />
+  <meta property="og:locale" content="{{ default_locale }}"/>
+  <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}" />
+  <meta property="og:title" content="{{ SITENAME }} - {{ page.title | replace("\"", "&quot;") }}" />
+  <meta property="og:description" content="{{ page.content | striptags | replace("\"", "&quot;") | truncate(196, False, '...') }}" />
+  <meta property="og:image" content="{{ SITEURL }}/images/og/{% if page.opengraph_image is defined %}{{ page.opengraph_image }}{% else %}opengraph-default.png{% endif %}" />
+  {% else %}
+  <meta property="og:type" content="blog" />
+  <meta property="og:site_name" content="{{ SITENAME }}"/>
+  <meta property="og:url" content="{{ SITEURL }}/{{ output_file }}" />
+  <meta property="og:locale" content="{{ default_locale }}"/>
+  <meta property="og:title" content="{{ SITENAME }}" />
+  <meta property="og:description" content="Welcome to my site - I write about SEO, Python and other stuff I find interesting." />
+  <meta property="og:image" content="{{ SITEURL }}/images/og/opengraph-default.png" />
+  {% endif %}
+  <!-- end open graph tags-->
+  
+{% endif %}
