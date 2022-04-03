@@ -10,3 +10,4 @@ Configs, content and other stuff for my personal blog.
 - [ ] Write up how to set up an Oracle VM to run Selenium
 - [ ] Write up the drop shadow bot
 - [ ] Transfer freddielarkins.com (~20th April) and point to .xyz
+- [ ] Change body font to something nicer
