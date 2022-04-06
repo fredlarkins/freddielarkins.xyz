@@ -9,7 +9,7 @@ SITEDESCRIPTION = 'Home of the ramblings of an SEO currently working for Zoopla.
 SITESUBTITLE = 'SEO, Python and other stuff.'
 #-- end test -- #
 
-SITEURL = ''
+SITEURL = 'https://freddielarkins.xyz'
 
 DISPLAY_PAGES_ON_MENU = False
 
@@ -17,6 +17,7 @@ PATH = 'content'
 
 STATIC_PATHS = ['images', 'pdfs', 'excel-files']
 
+PAGE_PATHS = ['pages', 'errors']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -25,12 +26,11 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (('cv', '/pdfs/freddie-larkins-cv.pdf'),
-         ('about me', '/pages/about-me.html'),
-         ('archives', '/archives.html'))
+# Side nav
+LINKS = (   ('home', '/'),
+            ('cv', '/pdfs/freddie-larkins-cv.pdf'),
+            ('about me', '/pages/about-me.html'),)
 
-# Social widget
 SOCIAL = (('github', 'https://www.github.com/fredlarkins/'),
           ('linkedin', 'https://www.linkedin.com/in/freddielarkins/'),)
 
@@ -41,10 +41,17 @@ RELATIVE_URLS = True
 
 # theme specific stuff: Flex
 THEME = 'themes/Flex-fredlarkins-modified'
-# THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
+THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
-# MAIN_MENU = False
+
+# Top nav
+MAIN_MENU = True
+MENUITEMS = (
+    ("Archives", "/archives.html"),
+    ("Python", "/category/python.html"),
+    ("SEO", "/category/seo.html"),
+)
 
 # from https://github.com/pelican-plugins/sitemap
 SITEMAP = {
@@ -58,12 +65,16 @@ SITEMAP = {
         "articles": "yearly",
         "indexes": "monthly",
         "pages": "yearly"
+    },
+    "exclude": {
+        "/pages/403-access-denied.html",
+        "/pages/404-not-found.html"
     }
 }
 
 PLUGIN_PATHS = ['plugins']
 
-PLUGINS = ['post_stats']
+PLUGINS = ['post_stats', 'sitemap']
 
 
 
