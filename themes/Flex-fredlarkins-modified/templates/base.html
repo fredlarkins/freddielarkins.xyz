@@ -7,6 +7,16 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJTPXRD');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <!-- Adding Analytics tag -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLXLD52JM"></script>
@@ -183,6 +193,11 @@
   {% if GOOGLE_TAG_MANAGER %}
     {% include "partial/gtm_noscript.html" %}
   {% endif %}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJTPXRD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <aside>
     <div>
       <a href="{{ SITEURL }}/">
@@ -277,7 +292,8 @@
 
     {% if MAIN_MENU %}
     <nav>
-      <a href="{{ SITEURL }}/">{{ _('Home') }}</a>
+      <!-- Commenting out as I've got a home link in the side nav (top on desktop) -->
+      <!-- <a href="{{ SITEURL }}/">{{ _('Home') }}</a> -->
 
       {% for title, link in MENUITEMS %}
       <a href="{{ link }}">{{ _(title) }}</a>

@@ -2,6 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJTPXRD');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <!-- Adding Analytics tag -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLXLD52JM"></script>
@@ -32,24 +42,26 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
-        disabled="disabled"
-    href="./theme/stylesheet/dark-theme.min.css">
+          media="(prefers-color-scheme: dark)"
+    href="https://freddielarkins.xyz/theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
-            disabled="disabled"
-          href="./theme/pygments/monokai.min.css">
+              media="(prefers-color-scheme: dark)"
+          href="https://freddielarkins.xyz/theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="./theme/pygments/github.min.css">
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="https://freddielarkins.xyz/theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/solid.css">
 
 
+    <link href="https://freddielarkins.xyz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freddie's SEO Blog :// Atom">
 
 
 
@@ -67,28 +79,33 @@
   <meta property="og:title" content="Building a bin collection reminder bot in Python"/>
   <meta property="og:description" content="Python is great for automating repetitive tasks, such as checking bin collection. I built a friendly Bin Bot to do just that."/>
   <meta property="og:locale" content="en_GB"/>
-  <meta property="og:url" content="./building-a-bin-collection-reminder-bot-in-python.html"/>
+  <meta property="og:url" content="https://freddielarkins.xyz/building-a-bin-collection-reminder-bot-in-python.html"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2022-04-01 09:31:00+01:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="./author/freddie-larkins.html">
+  <meta property="article:author" content="https://freddielarkins.xyz/author/freddie-larkins.html">
   <meta property="article:section" content="Python"/>
   <meta property="article:tag" content="Requests"/>
   <meta property="article:tag" content="JSON"/>
-  <meta property="og:image" content="./images/og/opengraph-default.png"/>
+  <meta property="og:image" content="https://freddielarkins.xyz/images/og/opengraph-default.png"/>
 
   <title>Building a bin collection reminder bot in Python | Freddie's SEO Blog ://</title>
 
 </head>
-<body class="light-theme">
+<body >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJTPXRD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <aside>
     <div>
-      <a href="./">
-        <img src="./theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
+      <a href="https://freddielarkins.xyz/">
+        <img src="https://freddielarkins.xyz/theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
       </a>
 
       <h1>
-        <a href="./">Freddie Larkins</a>
+        <a href="https://freddielarkins.xyz/">Freddie Larkins</a>
       </h1>
 
 <p>SEO, Python and other stuff.</p>
@@ -99,13 +116,13 @@
 
 
             <li>
+              <a target="_self" href="/" >home</a>
+            </li>
+            <li>
               <a target="_self" href="/pdfs/freddie-larkins-cv.pdf" >cv</a>
             </li>
             <li>
               <a target="_self" href="/pages/about-me.html" >about me</a>
-            </li>
-            <li>
-              <a target="_self" href="/archives.html" >archives</a>
             </li>
         </ul>
       </nav>
@@ -127,13 +144,24 @@
   </aside>
   <main>
 
+    <nav>
+      <!-- Commenting out as I've got a home link in the side nav (top on desktop) -->
+      <!-- <a href="https://freddielarkins.xyz/">Home</a> -->
+
+      <a href="/archives.html">Archives</a>
+      <a href="/category/python.html">Python</a>
+      <a href="/category/seo.html">SEO</a>
+
+      <a href="https://freddielarkins.xyz/feeds/all.atom.xml">Atom</a>
+
+    </nav>
 
 <article class="single">
   <header>
       
     <h1 id="building-a-bin-collection-reminder-bot-in-python">Building a bin collection reminder bot in Python</h1>
     <p>
-      Posted on Fri 01 April 2022 in <a href="./category/python.html">Python</a>
+      Posted on Fri 01 April 2022 in <a href="https://freddielarkins.xyz/category/python.html">Python</a>
 
       <!-- My addition - adding a different read-time plugin to the article template -->
       <!--  -->
@@ -155,7 +183,7 @@
 <p><center><em>Keep your eye on the DevTools panel on the left-hand side. Our precious requests!</em></center></p>
 <p>...and we can get all the data you see rendered in your browser in JSON. We can use that data to send automatic reminders for what bins are being collected, alleviating the need to repeat the aforementioned ritual. Neat!</p>
 <p>You can check out the repo below:</p>
-<div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="400" data-height="" data-theme="default"></div>
+<div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="" data-height="" data-theme="default"></div>
 <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 
 <p>I'll run through some of the interesting challenges I when building the bot.</p>
@@ -212,7 +240,11 @@
 <p>The <code>itemID</code> we just obtained is used in the endpoint for this <code>GET</code> request:</p>
 <pre><code>https://api.uk.alloyapp.io/api/item/<b>5f898d4790478c0067f8c318</b>?token=67ad2108-dd2b-407a-849a-411a15adf0b1</code></pre>
 
-<p>There is one field in the JSON response that we're interested in: <code>attributes_wasteContainersAssignableWasteContainers</code>. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:</p>
+<p>There is one field in the JSON response that we're interested in: </p>
+<div class="highlight"><pre><span></span><code>attributes_wasteContainersAssignableWasteContainers
+</code></pre></div>
+
+<p>This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:</p>
 <p><img alt="Diagram of the series of requests made between client and 2x servers" src="/images/webp/hackney_step_1.webp"></p>
 <p>For each value returned, the browser makes a request using the same scheme above (appending the <code>id</code> for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:</p>
 <div class="highlight"><pre><span></span><code>5fa55c586b4fb500650caf08 ---&gt; Recycling Sack
@@ -223,7 +255,11 @@
 <h4 id="3-retrieving-the-collection-schedules-for-each-waste-service">3. Retrieving the collection schedules for each waste service</h4>
 <p>This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.</p>
 <p>The browser makes a <code>POST</code> request for each <code>id</code>  obtained above.</p>
-<p>What we want in return is the value for <code>attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec</code>. This gives us the <code>id</code> for the collection timetable, which we retrieve by hitting an endpoint <em>containing</em> that timetable <code>id</code> For instance:</p>
+<p>What we want in return is the value for:</p>
+<div class="highlight"><pre><span></span><code>attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec
+</code></pre></div>
+
+<p>This gives us the <code>id</code> for the collection timetable, which we retrieve by hitting an endpoint <em>containing</em> that timetable <code>id</code> For instance:</p>
 <div class="highlight"><pre><span></span><code>5fa55c586b4fb500650caf08    # the id for Recycling Sack
 </code></pre></div>
 
@@ -287,14 +323,14 @@
 <p>Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:</p>
 <p><img alt="Location of the 'throttle' feature in DevTools" src="/images/webp/devtools-throtttling.webp"></p>
 <h3 id="3-if-you-cant-work-it-out-step-away-and-do-something-else">3. If you can't work it out, step away and do something else.</h3>
-<p>I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.</p>
+<p>I spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.</p>
 <hr>
 <p><em>P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it 🙃</em></p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="./tag/requests.html">Requests</a>
-      <a href="./tag/json.html">JSON</a>
+      <a href="https://freddielarkins.xyz/tag/requests.html">Requests</a>
+      <a href="https://freddielarkins.xyz/tag/json.html">JSON</a>
     </p>
   </div>
 
@@ -309,12 +345,15 @@
   &copy; April 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>
+  <!-- added a link to the xml sitemap in the footer -->
+  <a href="/sitemap.xml">Sitemap</a>
+  <span class="footer-separator">|</span>
 Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="./theme/dark-theme/dark-theme.min.js"
-          data-enable-auto-detect-theme="false"
+          src="https://freddielarkins.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
           data-default-theme="light"
           type="text/javascript">
   </script>
@@ -340,7 +379,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Freddie's SEO Blog :// ",
-  "url" : ".",
+  "url" : "https://freddielarkins.xyz",
   "image": "",
   "description": "Home of the ramblings of an SEO currently working for Zoopla."
 }

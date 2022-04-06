@@ -10,7 +10,7 @@
 &lt;p&gt;&lt;center&gt;&lt;em&gt;Keep your eye on the DevTools panel on the left-hand side. Our precious requests!&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;...and we can get all the data you see rendered in your browser in JSON. We can use that data to send automatic reminders for what bins are being collected, alleviating the need to repeat the aforementioned ritual. Neat!&lt;/p&gt;
 &lt;p&gt;You can check out the repo below:&lt;/p&gt;
-&lt;div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="400" data-height="" data-theme="default"&gt;&lt;/div&gt;
+&lt;div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="" data-height="" data-theme="default"&gt;&lt;/div&gt;
 &lt;script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"&gt;&lt;/script&gt;
 
 &lt;p&gt;I'll run through some of the interesting challenges I when building the bot.&lt;/p&gt;
@@ -67,7 +67,11 @@
 &lt;p&gt;The &lt;code&gt;itemID&lt;/code&gt; we just obtained is used in the endpoint for this &lt;code&gt;GET&lt;/code&gt; request:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://api.uk.alloyapp.io/api/item/&lt;b&gt;5f898d4790478c0067f8c318&lt;/b&gt;?token=67ad2108-dd2b-407a-849a-411a15adf0b1&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;There is one field in the JSON response that we're interested in: &lt;code&gt;attributes_wasteContainersAssignableWasteContainers&lt;/code&gt;. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:&lt;/p&gt;
+&lt;p&gt;There is one field in the JSON response that we're interested in: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;attributes_wasteContainersAssignableWasteContainers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Diagram of the series of requests made between client and 2x servers" src="/images/webp/hackney_step_1.webp"&gt;&lt;/p&gt;
 &lt;p&gt;For each value returned, the browser makes a request using the same scheme above (appending the &lt;code&gt;id&lt;/code&gt; for the waste container to the endpoint) to map that value to a 'human-readable' service. So, for this property:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;5fa55c586b4fb500650caf08 ---&amp;gt; Recycling Sack
@@ -78,7 +82,11 @@
 &lt;h4 id="3-retrieving-the-collection-schedules-for-each-waste-service"&gt;3. Retrieving the collection schedules for each waste service&lt;/h4&gt;
 &lt;p&gt;This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.&lt;/p&gt;
 &lt;p&gt;The browser makes a &lt;code&gt;POST&lt;/code&gt; request for each &lt;code&gt;id&lt;/code&gt;  obtained above.&lt;/p&gt;
-&lt;p&gt;What we want in return is the value for &lt;code&gt;attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec&lt;/code&gt;. This gives us the &lt;code&gt;id&lt;/code&gt; for the collection timetable, which we retrieve by hitting an endpoint &lt;em&gt;containing&lt;/em&gt; that timetable &lt;code&gt;id&lt;/code&gt; For instance:&lt;/p&gt;
+&lt;p&gt;What we want in return is the value for:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This gives us the &lt;code&gt;id&lt;/code&gt; for the collection timetable, which we retrieve by hitting an endpoint &lt;em&gt;containing&lt;/em&gt; that timetable &lt;code&gt;id&lt;/code&gt; For instance:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;5fa55c586b4fb500650caf08    # the id for Recycling Sack
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -142,7 +150,7 @@
 &lt;p&gt;Part of this challenge was understanding how a series of up to fifteen requests fit together. Slowing them down helped me to get a sense of what request was governing the visual data I could see trickling through on the page:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Location of the 'throttle' feature in DevTools" src="/images/webp/devtools-throtttling.webp"&gt;&lt;/p&gt;
 &lt;h3 id="3-if-you-cant-work-it-out-step-away-and-do-something-else"&gt;3. If you can't work it out, step away and do something else.&lt;/h3&gt;
-&lt;p&gt;I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.&lt;/p&gt;
+&lt;p&gt;I spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;em&gt;P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it 🙃&lt;/em&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Requests"></category><category term="JSON"></category></entry><entry><title>Using Text to Columns to analyse a site's traffic sources</title><link href="https://freddielarkins.xyz/using-text-to-columns-to-analyse-a-site-s-traffic-sources.html" rel="alternate"></link><published>2022-03-20T16:23:00+00:00</published><updated>2022-03-20T16:23:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-20:/using-text-to-columns-to-analyse-a-site-s-traffic-sources.html</id><summary type="html">&lt;p&gt;Excel's Text to Columns feature is a quick and easy way to segment a list of URLs by subfolder to understand which parts of a site drive organic traffic.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Text to Columns is probably one of the tools I use most frequently in my day-to-day SEO work.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Kudos to Distilled's &lt;a href="https://www.distilled.net/excel-for-seo/"&gt;Excel for SEOs&lt;/a&gt; guide for inspiring this article – I'd highly recommend it to any SEOs looking to sharpen up their Excel skills. Anyway, let's get into it.&lt;/p&gt;
@@ -220,14 +228,17 @@
 &lt;p&gt;Essentially, we’re converting the results of &lt;code&gt;SEARCH&lt;/code&gt; into something we can use in the final component of the formula, our &lt;code&gt;IF&lt;/code&gt; statement.&lt;/p&gt;
 &lt;h3 id="the-if-function"&gt;The IF function&lt;/h3&gt;
 &lt;p&gt;The &lt;a href="https://exceljet.net/excel-functions/excel-if-function"&gt;IF function&lt;/a&gt; uses a logical test to return one value for a TRUE result, and another for FALSE.&lt;/p&gt;
-&lt;p&gt;We bring everything together using an &lt;code&gt;IF&lt;/code&gt; statement: &lt;code&gt;=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We bring everything together using an &lt;code&gt;IF&lt;/code&gt; statement: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;IF&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;ISNUMBER&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;SEARCH&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;BRANDNAME&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="nv"&gt;A2&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Non-branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;img alt="Screenshot of an Excel table showing the full function" src="/images/png/search-isnumber-and-if-functions.png"&gt;&lt;/p&gt;
 &lt;p&gt;Our logical test is the &lt;code&gt;ISNUMBER(...)&lt;/code&gt; component of the function. If that evaluates as TRUE, the &lt;code&gt;IF&lt;/code&gt; statement returns “Branded”. If FALSE, it returns “Non-branded”.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;And that’s it!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;I use this function without fail when I’m dealing with lists of keywords. After reading this, hopefully you will too.&lt;/p&gt;</content><category term="SEO"></category><category term="Excel"></category></entry><entry><title>Monitoring your site's most important URLs with Python</title><link href="https://freddielarkins.xyz/monitoring-your-site-s-most-important-urls-with-python.html" rel="alternate"></link><published>2022-03-19T15:09:00+00:00</published><updated>2022-03-19T15:09:00+00:00</updated><author><name>Freddie Larkins</name></author><id>tag:freddielarkins.xyz,2022-03-19:/monitoring-your-site-s-most-important-urls-with-python.html</id><summary type="html">&lt;p&gt;I wrote a few Python scripts that monitor your site's most important URLs for any 4xx and 5xx errors. Here's how they work.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;I've you've ever discovered a piece of content has been accidentally redirected or removed, this article might be for you.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;As SEOs, we're precious about our site's traffic - especially when we're losing it! The inspo for this collection of Python scripts arose at work, where I'd noticed a few pieces of traffic-driving bits of content had been accidentally redirected elsewhere, or were stuck in infinite redirect loops. Of course, in both cases, traffic loss was the result.&lt;/p&gt;
 &lt;p&gt;This &lt;a href="https://github.com/fredlarkins/monitor-top-urls"&gt;GitHub repo was&lt;/a&gt; my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check.&lt;/p&gt;
-&lt;div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="400" data-height="" data-theme="default"&gt;&lt;/div&gt;
+&lt;div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="" data-height="" data-theme="default"&gt;&lt;/div&gt;
 &lt;script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"&gt;&lt;/script&gt;
 
 &lt;p&gt;If you just want to go ahead and try it, run:&lt;/p&gt;

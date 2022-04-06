@@ -2,6 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJTPXRD');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <!-- Adding Analytics tag -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLXLD52JM"></script>
@@ -32,24 +42,26 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
-        disabled="disabled"
-    href="../theme/stylesheet/dark-theme.min.css">
+          media="(prefers-color-scheme: dark)"
+    href="https://freddielarkins.xyz/theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
-            disabled="disabled"
-          href="../theme/pygments/monokai.min.css">
+              media="(prefers-color-scheme: dark)"
+          href="https://freddielarkins.xyz/theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="../theme/pygments/github.min.css">
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="https://freddielarkins.xyz/theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://freddielarkins.xyz/theme/font-awesome/css/solid.css">
 
 
+    <link href="https://freddielarkins.xyz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freddie's SEO Blog :// Atom">
 
 
 
@@ -67,10 +79,10 @@
   <meta property="og:site_name" content="Freddie's SEO Blog ://"/>
   <meta property="og:type" content="blog" />
   <meta property="og:locale" content="en_GB"/>
-  <meta property="og:url" content="../pages/about-me.html" />
+  <meta property="og:url" content="https://freddielarkins.xyz/pages/about-me.html" />
   <meta property="og:title" content="Freddie's SEO Blog :// - About Me" />
   <meta property="og:description" content="Hi, I'm Freddie 👋 I'm a London-based SEO, currently working for Zoopla. I've been in digital marketing for about four years. My journey began with me presenting a virtual open day at the Uni..." />
-  <meta property="og:image" content="../images/og/opengraph-default.png" />
+  <meta property="og:image" content="https://freddielarkins.xyz/images/og/opengraph-default.png" />
   <!-- end open graph tags-->
   
 
@@ -79,15 +91,20 @@
   <title>About Me | Freddie's SEO Blog ://</title>
 
 </head>
-<body class="light-theme">
+<body >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJTPXRD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <aside>
     <div>
-      <a href="../">
-        <img src="../theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
+      <a href="https://freddielarkins.xyz/">
+        <img src="https://freddielarkins.xyz/theme/img/profile.png" alt="Freddie Larkins" title="Freddie Larkins">
       </a>
 
       <h1>
-        <a href="../">Freddie Larkins</a>
+        <a href="https://freddielarkins.xyz/">Freddie Larkins</a>
       </h1>
 
 <p>SEO, Python and other stuff.</p>
@@ -98,13 +115,13 @@
 
 
             <li>
+              <a target="_self" href="/" >home</a>
+            </li>
+            <li>
               <a target="_self" href="/pdfs/freddie-larkins-cv.pdf" >cv</a>
             </li>
             <li>
               <a target="_self" href="/pages/about-me.html" >about me</a>
-            </li>
-            <li>
-              <a target="_self" href="/archives.html" >archives</a>
             </li>
         </ul>
       </nav>
@@ -126,6 +143,17 @@
   </aside>
   <main>
 
+    <nav>
+      <!-- Commenting out as I've got a home link in the side nav (top on desktop) -->
+      <!-- <a href="https://freddielarkins.xyz/">Home</a> -->
+
+      <a href="/archives.html">Archives</a>
+      <a href="/category/python.html">Python</a>
+      <a href="/category/seo.html">SEO</a>
+
+      <a href="https://freddielarkins.xyz/feeds/all.atom.xml">Atom</a>
+
+    </nav>
 
 <article class="single">
   <header>
@@ -207,12 +235,15 @@ I'll keep this blog updated as I go!</p>
   &copy; April 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>
+  <!-- added a link to the xml sitemap in the footer -->
+  <a href="/sitemap.xml">Sitemap</a>
+  <span class="footer-separator">|</span>
 Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="../theme/dark-theme/dark-theme.min.js"
-          data-enable-auto-detect-theme="false"
+          src="https://freddielarkins.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
           data-default-theme="light"
           type="text/javascript">
   </script>
@@ -238,7 +269,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Freddie's SEO Blog :// ",
-  "url" : "..",
+  "url" : "https://freddielarkins.xyz",
   "image": "",
   "description": "Home of the ramblings of an SEO currently working for Zoopla."
 }

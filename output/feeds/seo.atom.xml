@@ -75,7 +75,10 @@
 &lt;p&gt;Essentially, we’re converting the results of &lt;code&gt;SEARCH&lt;/code&gt; into something we can use in the final component of the formula, our &lt;code&gt;IF&lt;/code&gt; statement.&lt;/p&gt;
 &lt;h3 id="the-if-function"&gt;The IF function&lt;/h3&gt;
 &lt;p&gt;The &lt;a href="https://exceljet.net/excel-functions/excel-if-function"&gt;IF function&lt;/a&gt; uses a logical test to return one value for a TRUE result, and another for FALSE.&lt;/p&gt;
-&lt;p&gt;We bring everything together using an &lt;code&gt;IF&lt;/code&gt; statement: &lt;code&gt;=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We bring everything together using an &lt;code&gt;IF&lt;/code&gt; statement: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;IF&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;ISNUMBER&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;SEARCH&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;BRANDNAME&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="nv"&gt;A2&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Non-branded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;img alt="Screenshot of an Excel table showing the full function" src="/images/png/search-isnumber-and-if-functions.png"&gt;&lt;/p&gt;
 &lt;p&gt;Our logical test is the &lt;code&gt;ISNUMBER(...)&lt;/code&gt; component of the function. If that evaluates as TRUE, the &lt;code&gt;IF&lt;/code&gt; statement returns “Branded”. If FALSE, it returns “Non-branded”.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;And that’s it!&lt;/strong&gt;&lt;/p&gt;
