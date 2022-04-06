@@ -12,7 +12,7 @@ As SEOs, we're precious about our site's traffic - especially when we're losing 
 
 This [GitHub repo was](https://github.com/fredlarkins/monitor-top-urls) my attempt to set up an automated monitoring system for a site's top URLs by organic clicks, checking daily for 4xx and 5xx errors and emailing you the results of the check.
 
-<div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="400" data-height="" data-theme="default"></div>
+<div class="github-card" data-github="fredlarkins/monitor-top-urls" data-width="" data-height="" data-theme="default"></div>
 <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 
 If you just want to go ahead and try it, run:

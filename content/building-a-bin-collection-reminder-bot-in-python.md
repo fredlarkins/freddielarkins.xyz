@@ -25,7 +25,7 @@ Using the [Requests](https://docs.python-requests.org/en/latest/) library, we ca
 
 You can check out the repo below:
 
-<div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="400" data-height="" data-theme="default"></div>
+<div class="github-card" data-github="fredlarkins/hackney-bin-bot" data-width="" data-height="" data-theme="default"></div>
 <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 
 I'll run through some of the interesting challenges I when building the bot.
@@ -84,7 +84,11 @@ The `itemID` we just obtained is used in the endpoint for this `GET` request:
 
 <pre><code>https://api.uk.alloyapp.io/api/item/<b>5f898d4790478c0067f8c318</b>?token=67ad2108-dd2b-407a-849a-411a15adf0b1</code></pre>
 
-There is one field in the JSON response that we're interested in: `attributes_wasteContainersAssignableWasteContainers`. This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:
+There is one field in the JSON response that we're interested in: 
+```
+attributes_wasteContainersAssignableWasteContainers
+```
+This field contains a list of up to four new alphanumeric values, each of which represents a 'waste container' - i.e. recycling, food waste, black bins or garden waste. So far, the workflow looks a bit like this:
 
 ![Diagram of the series of requests made between client and 2x servers](/images/webp/hackney_step_1.webp)
 
@@ -101,7 +105,11 @@ This next bit is a bit confusing, and seems to me somewhat inefficient. Anyway.
 
 The browser makes a `POST` request for each `id`  obtained above.
 
-What we want in return is the value for `attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec`. This gives us the `id` for the collection timetable, which we retrieve by hitting an endpoint _containing_ that timetable `id` For instance:
+What we want in return is the value for:
+```
+attributes_scheduleCodeWorkflowID_5f8dbfdce27d98006789b4ec
+```
+This gives us the `id` for the collection timetable, which we retrieve by hitting an endpoint _containing_ that timetable `id` For instance:
 ```text
 5fa55c586b4fb500650caf08    # the id for Recycling Sack
 ```
@@ -185,7 +193,7 @@ Part of this challenge was understanding how a series of up to fifteen requests 
 ![Location of the 'throttle' feature in DevTools](/images/webp/devtools-throtttling.webp)
 
 ### 3. If you can't work it out, step away and do something else.
-I w̶a̶s̶t̶e̶d spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.
+I spent hours trying figure out how this application worked. Often, though, I found that I made a breakthrough when I'd stepped away from my laptop for a few hours or days. It's a bit of a cliché, but it really does help your brain reset and come at the project with a fresh set of eyes.
 
 ---
 *P.S. Hackney Council: if you're reading this, please don't change your backend. My Bin Bot won't like it 🙃*

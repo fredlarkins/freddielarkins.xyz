@@ -50,7 +50,10 @@ Essentially, we’re converting the results of `SEARCH` into something we can us
 
 The [IF function](https://exceljet.net/excel-functions/excel-if-function) uses a logical test to return one value for a TRUE result, and another for FALSE.
 
-We bring everything together using an `IF` statement: `=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")`
+We bring everything together using an `IF` statement: 
+```
+=IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")
+```
 
 ![Screenshot of an Excel table showing the full function](/images/png/search-isnumber-and-if-functions.png)
 
