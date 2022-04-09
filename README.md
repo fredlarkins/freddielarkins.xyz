@@ -2,6 +2,7 @@
 Configs, content and other stuff for my personal blog.
 
 ## To do:
+- [ ] Convert remaining images to .webp (set up script to do so or use [Ciffone Digital's repo](https://github.com/Ciffone-Digital/webp_check/blob/main/webp_check.py)
 - [ ] Clean up pelican.conf (alphabetise?)
 - [ ] Transfer freddielarkins.com (~11th April) and point to .xyz
 - [ ] Write up how to set up an Oracle VM to run Selenium
