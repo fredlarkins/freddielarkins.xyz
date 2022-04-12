@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJTPXRD');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Adding Analytics tag -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLXLD52JM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7XLXLD52JM');
+  </script>
+  <!-- end analytics-->
+
+  <!-- adding favicon link tags to the head -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/site.webmanifest">
+  <!--for some reason, the below breaks the code highlighting in codeblocks-->
+  <meta name="msapplication-TileColor" content="#da532c"> 
+  <meta name="theme-color" content="#ffffff">
+  <!-- end favicons -->
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="../theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="../theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="../theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/solid.css">
+
+
+
+
+
+  
+
+
+ 
+
+<meta name="author" content="Freddie Larkins" />
+<meta name="description" content="Oracle have a handy little always-free tier where you can access two virtual machine instances. Here&#39;s how to set one up." />
+<meta name="keywords" content="Virtual Machine, Oracle">
+
+
+  <meta property="og:site_name" content="Freddie's SEO Blog ://"/>
+  <meta property="og:title" content="How to set up a free Oracle virtual machine instance"/>
+  <meta property="og:description" content="Oracle have a handy little always-free tier where you can access two virtual machine instances. Here&#39;s how to set one up."/>
+  <meta property="og:locale" content="en_GB"/>
+  <meta property="og:url" content="../drafts/how-to-set-up-a-free-oracle-vm-standard-e2-1-micro-instance.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2022-04-11 12:25:00+01:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="../author/freddie-larkins.html">
+  <meta property="article:section" content="Networking"/>
+  <meta property="article:tag" content="Virtual Machine"/>
+  <meta property="article:tag" content="Oracle"/>
+  <meta property="og:image" content="../images/og/opengraph-default.png"/>
+
+  <title>How to set up a free Oracle virtual machine instance | Freddie's SEO Blog ://</title>
+
+</head>
+<body >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJTPXRD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <aside>
+    <div>
+      <a href="../">
+        <img src="/images/webp/freddie-larkins-mugshot.webp" alt="Freddie Larkins" title="Freddie Larkins">
+      </a>
+
+      <h1>
+        <a href="../">Freddie Larkins</a>
+      </h1>
+
+<p>SEO, Python and other stuff.</p>
+
+      <nav>
+        <ul class="list">
+
+
+
+            <li>
+              <a target="_self" href="/" >home</a>
+            </li>
+            <li>
+              <a target="_self" href="/pdfs/freddie-larkins-cv.pdf" >cv</a>
+            </li>
+            <li>
+              <a target="_self" href="/pages/about-me.html" >about me</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/fredlarkins/" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/freddielarkins/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <!-- Commenting out as I've got a home link in the side nav (top on desktop) -->
+      <!-- <a href="../">Home</a> -->
+
+      <a href="/archives.html">Archives</a>
+      <a href="/category/python.html">Python</a>
+      <a href="/category/seo.html">SEO</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="how-to-set-up-a-free-oracle-vm-standard-e2-1-micro-instance">How to set up a free Oracle virtual machine instance</h1>
+    <p>
+      Posted on Mon 11 April 2022 in <a href="../category/networking.html">Networking</a>
+
+      <!-- My addition - adding a different read-time plugin to the article template -->
+      <!--  -->
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <p><strong>I was looking for a free virtual machine to run some Python scripts on, and came across Oracle's free virtual machines.</strong></p>
+<p>On their always-free tier, you can set up two virtual machine instances, each with 1GB of memory and 1 OCPU (or 'Oracle CPU').</p>
+<p>The instances are in Oracle's <strong>VM.Standard.E2.1.Micro</strong> 'shape'. Oracle offer a load of different '<a href="https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm">shapes</a>', each with differing amounts of computing power.</p>
+<p>The VM instances are certainly not as powerful as a laptop, but for small/recurring tasks they're great. Plus, if you're a newbie like me, you get to learn a little about networking and accessing remote machines.</p>
+<p><strong>This article will take you through how to get your own VM instances up and running.</strong></p>
+<div class="toc">
+<ul>
+<li><a href="#setting-up-your-first-vm-instance">Setting up your first VM instance</a><ul>
+<li><a href="#1-set-up-an-oracle-cloud-account">1. Set up an Oracle Cloud account</a></li>
+<li><a href="#2-sign-in-and-create-your-instance">2. Sign in and create your instance</a></li>
+<li><a href="#3-ssh-into-your-instance">3. SSH into your instance</a><ul>
+<li><a href="#add-your-virtual-machine-to-your-ssh-config-file">Add your virtual machine to your SSH config file</a></li>
+</ul>
+</li>
+<li><a href="#4-optional-upgrade-the-software-packages-on-your-instance">4. Optional: upgrade the software packages on your instance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="setting-up-your-first-vm-instance">Setting up your first VM instance</h2>
+<h3 id="1-set-up-an-oracle-cloud-account">1. Set up an Oracle Cloud account</h3>
+<p>Head to <a href="https://www.oracle.com/uk/cloud/free/">Oracle's website</a> to sign up for a free-tier Oracle Cloud account.</p>
+<p><img alt="The sign-up page for Oracle's free-tier Cloud account." src="/images/webp/oracle-sign-up.webp"></p>
+<p>You will be asked to provide payment details but as long as you don't stray from the 'always-free' services, you should be alright! I haven't seen any charges on my account yet.</p>
+<h3 id="2-sign-in-and-create-your-instance">2. Sign in and create your instance</h3>
+<p>Once your account is created, <a href="https://www.oracle.com/uk/cloud/sign-in.html">sign in</a> to your newly-created Oracle Cloud account.</p>
+<p>On your account <a href="https://cloud.oracle.com/">homepage</a>, scroll down until you see <a href="https://cloud.oracle.com/compute/instances/create">'Create a VM instance'</a>.</p>
+<p><img alt="The 'Create a VM instance' button on the Oracle Cloud account homepage." src="/images/webp/oracle-create-instance.webp"></p>
+<p>Click on the button and run through the setup form. The first thing to do is name your instance:</p>
+<p><img alt="The first stage of setting up a VM instance." src="/images/webp/oracle-create-stage-1.webp"></p>
+<p>For the purposes of the demo, you'll see that mine is called <code>website-demo</code>. You can name yours whatever you like.</p>
+<p>You can leave everything else alone. The only other thing you should do before creating your instance is download the private key to connect to the instance via SSH.</p>
+<p><img alt="The button to download a private key in the setup page." src="/images/webp/oracle-create-stage-1-ssh.webp"></p>
+<p>And that's all! Once you've hit <code>Create</code> in the bottom bar, you'll be taken to the page that <a href="https://cloud.oracle.com/compute/instances">lists all your instances</a>. In my case, clicking on my <code>website-demo</code> instance takes me to the details page for that instance:</p>
+<p><img alt="Details page for my VM instance." src="/images/webp/oracle-provisioned-instance.webp"></p>
+<p>It takes a couple of minutes for the instance to get up and running after you create it; the status may initially show as <code>PROVISIONING</code> on this page.</p>
+<h3 id="3-ssh-into-your-instance">3. SSH into your instance</h3>
+<p>Secure Shell Protocol (or SSH) is a protocol for securely connecting to remote machines. I'm assuming a level of familiarity with the <code>ssh</code> command here - if you're looking for an intro to SSH, I quite like <a href="https://youtu.be/ORcvSkgdA58">Computerphile's explanation</a> on YouTube!</p>
+<h4 id="add-your-virtual-machine-to-your-ssh-config-file">Add your virtual machine to your SSH <code>config</code> file</h4>
+<p>This step is optional but will save you from having to remember the IP address of your VM instance every time you want to connect to it!</p>
+<p>Navigate to the <code>.ssh</code> folder in your home directory and create a file called <code>config</code> if it doesn't already exist. Replace my details with the equivalent ones for your VM instance:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># replace with the &#39;human-readable&#39; name for your instance</span>
+Host website-test
+
+    <span class="c1"># replace with the public IP address of your instance</span>
+    HostName <span class="m">123</span>.456.789
+
+    <span class="c1"># keep the same!</span>
+    User opc
+
+    <span class="c1"># replace with the file path of the private key you saved earlier</span>
+    IdentityFile /path-to-your-private.key
+</code></pre></div>
+
+<p>With the config file updated, connecting to my VM is as simple as:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>ssh website-demo
+</code></pre></div>
+
+<p>If you're connecting for the first time, you may be denied entry the first time. Simply try again. Your terminal output should look something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>ssh website-demo
+
+<span class="go">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span>
+
+<span class="go">Warning: Permanently added &#39;123.456.789&#39; (ECDSA) to the list of known hosts. </span>
+<span class="go">Activate the web console with: systemctl enable --now cockpit.socket</span>
+<span class="go">Last login: Thu Apr 7 12:29:02 2022 from 84.245.194.200</span>
+</code></pre></div>
+
+<p>And then you'll be in!</p>
+<div class="highlight"><pre><span></span><code><span class="gp">[opc@website-demo ~]$</span>
+</code></pre></div>
+
+<h3 id="4-optional-upgrade-the-software-packages-on-your-instance">4. Optional: upgrade the software packages on your instance</h3>
+<p>It's generally a good idea to keep the software up-to-date on your laptop - the same applies to your virtual machine!</p>
+<p>You can download the latest versions  all the preinstalled software on your instance with the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">[opc@website-demo ~]$ </span>sudo yum update -y
+</code></pre></div>
+
+<p>When I first did this, it took about 17 minutes for everything to download and update. Go and grab a cup of tea! You should see something like this in your terminal prompt:</p>
+<p><img alt="Terminal prompt showing the system packaged being updated on the VM instance." src="/images/webp/system-update.webp"></p>
+<p>And that's it. You could use it to run a <a href="/building-a-bin-collection-reminder-bot-in-python.html">bin collection reminder bot</a>, or do web-scraping tasks with Selenium. Enjoy!</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/virtual-machine.html">Virtual Machine</a>
+      <a href="../tag/oracle.html">Oracle</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; April 2022  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_GB" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+  <!-- added a link to the xml sitemap in the footer -->
+  <a href="/sitemap.xml">Sitemap</a>
+  <span class="footer-separator">|</span>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="../theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Freddie's SEO Blog :// ",
+  "url" : "..",
+  "image": "/images/webp/freddie-larkins-mugshot.webp",
+  "description": "Home of the ramblings of an SEO currently working for Zoopla."
+}
+</script>
+
+</body>
+</html>
