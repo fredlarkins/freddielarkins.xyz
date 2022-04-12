@@ -7,6 +7,7 @@ SITENAME = "Freddie's SEO Blog ://"
 SITETITLE = "Freddie Larkins" 
 SITEDESCRIPTION = 'Home of the ramblings of an SEO currently working for Zoopla.'
 SITESUBTITLE = 'SEO, Python and other stuff.'
+SITELOGO = '/images/webp/freddie-larkins-mugshot.webp'
 #-- end test -- #
 
 SITEURL = 'https://freddielarkins.xyz'
@@ -74,19 +75,23 @@ SITEMAP = {
 
 PLUGIN_PATHS = ['plugins']
 
-PLUGINS = ['post_stats', 'sitemap']
+PLUGINS = ['post_stats', 'sitemap', 'seo']
 
+# the settings for the SEO plugin
+SEO_REPORT = False
+SEO_ENHANCER = True # the only setting I want
+SEO_ENHANCER_OPEN_GRAPH = False
+SEO_ENHANCER_TWITTER_CARDS = False
 
+# CC_LICENSE = {
+#     "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
+#     "version": "4.0",
+#     "slug": "by-sa",
+#     "icon": True,
+#     "language": "en_GB",
+# }
 
-CC_LICENSE = {
-    "name": "Creative Commons Attribution-ShareAlike 4.0 International License",
-    "version": "4.0",
-    "slug": "by-sa",
-    "icon": True,
-    "language": "en_GB",
-}
-
-COPYRIGHT_YEAR = datetime.now().strftime('%B %Y') # and month, technically
+COPYRIGHT_YEAR = f"Freddie Larkins {datetime.now().strftime('%B %Y')}" # and month, technically
 
 '''
 Settings taken from from https://cloudbytes.dev/snippets/add-a-table-of-contents-using-markdown-in-pelican
