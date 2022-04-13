@@ -207,7 +207,7 @@
 &lt;p&gt;Looping through each of the URLs obtained in the previous step, we'll record the URL, status code, error message (if applicable, e.g. in the case of a server error), redirect type, redirect URL and resolved URL. If any URLs throw errors, the user will be emailed in the next step.&lt;/p&gt;
 &lt;h2 id="emailing-the-user-about-errors"&gt;Emailing the user about errors&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;app.py&lt;/code&gt; is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
-&lt;img alt="Screenshot of a warning email" src="/images/png/errors-detected.png"&gt;
+&lt;img alt="Screenshot of a warning email" src="/images/webp/errors-detected.webp"&gt;
 &lt;center&gt;&lt;em&gt;Oh no!&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;The emails are sent using the &lt;a href="https://pypi.org/project/yagmail/"&gt;yagmail&lt;/a&gt; package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!&lt;/p&gt;
 &lt;h2 id="learnings"&gt;Learnings&lt;/h2&gt;
