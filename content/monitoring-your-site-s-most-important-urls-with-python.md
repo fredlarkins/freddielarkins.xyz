@@ -75,7 +75,7 @@ Looping through each of the URLs obtained in the previous step, we'll record the
 
 ## Emailing the user about errors
 `app.py` is where all the scripts are brought together. It uses the argparse library to take command-line arguments like the number of URLs to check and the recipients of the warning emails. It then runs through the flow outlined above, and uses a bit of conditional logic to send one of two email templates to the recipient: Errors Discovered, or No New Errors discovered.
-![Screenshot of a warning email](/images/png/errors-detected.png)
+![Screenshot of a warning email](/images/webp/errors-detected.webp)
 <center>_Oh no!_</center>
 
 The emails are sent using the [yagmail](https://pypi.org/project/yagmail/) package, a wonderfully simple SMTP client. Sadly, Gmail are retiring the option to allow less-secure-app-access to a Google account in summer '22; thereafter, sending emails via yagmail will require (I assume) some sort of OAuth implementation. So enjoy it while it lasts!

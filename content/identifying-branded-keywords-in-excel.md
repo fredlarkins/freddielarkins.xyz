@@ -29,7 +29,7 @@ Let’s break down each part of the formula, working inside out. We’ll use an 
 
 The [SEARCH function](https://exceljet.net/excel-functions/excel-search-function) looks for the provided string of text inside another [string](https://www.deskbright.com/excel/excel-string-functions/) of text, returning the position of the first character in the case of a match. It’s not case sensitive. In our case, `=SEARCH("nike",A2)` is asking Excel to look for the text “nike” inside our keyword text string.
 
-![Screenshot of an Excel table demonstrating the application of the SEARCH function to a set of keywords.](/images/png/search-function-screenshot.png)
+![Screenshot of an Excel table demonstrating the application of the SEARCH function to a set of keywords.](/images/webp/search-function-screenshot.webp)
 
 If it is present, the formula will return the position of the “n” in “nike”. If it is not present, the formula will evaluate as a #VALUE! error.
 
@@ -37,7 +37,7 @@ If it is present, the formula will return the position of the “n” in “nike
 
 The [ISNUMBER function](https://exceljet.net/excel-functions/excel-isnumber-function) simply checks that a given cell is a number, returning either TRUE or FALSE. Thus, our formula becomes `=ISNUMBER(SEARCH("nike"),A2)`:
 
-![Screenshot of an Excel table demonstrating the application of the SEARCH function in conjunction with ISNUMBER to a set of keywords.](/images/png/search-and-isnumber-functions.png)
+![Screenshot of an Excel table demonstrating the application of the SEARCH function in conjunction with ISNUMBER to a set of keywords.](/images/webp/search-and-isnumber-functions.webp)
 
 By wrapping our `SEARCH` function with `ISNUMBER`, we’re converting the output of the former into a Boolean TRUE or FALSE value. In other words:
 
@@ -55,7 +55,7 @@ We bring everything together using an `IF` statement:
 =IF(ISNUMBER(SEARCH("BRANDNAME",A2)),"Branded","Non-branded")
 ```
 
-![Screenshot of an Excel table showing the full function](/images/png/search-isnumber-and-if-functions.png)
+![Screenshot of an Excel table showing the full function](/images/webp/search-isnumber-and-if-functions.webp)
 
 Our logical test is the `ISNUMBER(...)` component of the function. If that evaluates as TRUE, the `IF` statement returns “Branded”. If FALSE, it returns “Non-branded”.
 
