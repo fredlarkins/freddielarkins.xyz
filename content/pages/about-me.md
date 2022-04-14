@@ -7,7 +7,7 @@ Slug: about-me
 
 I'm a London-based SEO, currently working for Zoopla. I've been in digital marketing for about four years.
 
-![My girfriend, Merrill, and I](/images/png/merrill-and-freddie.png)
+![My girfriend, Merrill, and I.](/images/webp/merrill-and-freddie.webp)
 
 My journey began with me [presenting a virtual open day](https://www.facebook.com/unibirmingham/videos/10155811010908608 "Facebook video of me giving a campus tour for the University of Birmingham's virtual open day in 2017") at the Uni of Birmingham (`cringe warning`: watch at your peril) - fast forward a few internships, a few jobs and now we're here!
 
@@ -17,8 +17,8 @@ I'll be honest; I've never really done personal blogging before. This blog is an
   "@context": "https://schema.org/",
   "@type": "Person",
   "name": "Freddie Larkins",
-  "url": "https://freddielarkins.xyz",
-  "image": "https://freddielarkins.xyz/theme/img/profile.png",
+  "url": "https://freddielarkins.xyz/",
+  "image": "https://freddielarkins.xyz/images/webp/freddie-larkins-mugshot.webp",
   "sameAs": "https://www.linkedin.com/in/freddielarkins/",
   "jobTitle": "Senior SEO Analyst",
   "worksFor": {
@@ -33,7 +33,7 @@ I'll be honest; I've never really done personal blogging before. This blog is an
 My career so far
 ----------------
 
-![Student Hut logo](/images/png/student-hut-logo.png)
+![Student Hut logo](/images/webp/student-hut-logo.webp)
 
 I began my career at [Student Hut](https://studenthut.com/ "Student Hut homepage"), a review site for universities. I joined as Content & Social Media Exec but quickly found I was more interested in SEO than social and CRM.
 
@@ -44,7 +44,7 @@ Taking on the role of Onsite Content & Outreach Exec, I had some success with Br
 Linkbuilding is _ever so slightly_ soul-crushing, though, and there's certainly more to SEO than outreach. So after 8 months at Student Hut I was lucky to be offered a job in Trainline's SEO team as an SEO Content Exec.  
 &nbsp;
 
-![Trainline logo](/images/png/trainline-logo.png)
+![Trainline logo](/images/webp/trainline-logo.webp)
 
 I worked at [Trainline](https://www.thetrainline.com/ "Trainline homepage") from April 2019 to June 2021; it was a fab couple of years.
 
@@ -55,7 +55,7 @@ I also gained a really interesting perspective from inside a tech business as it
 Most importantly, I worked with some awesome, clever people.  
 &nbsp;
 
-![Zoopla logo](/images/png/zoopla-logo.png)
+![Zoopla logo](/images/webp/zoopla-logo.webp)
 
 At [Zoopla](https://www.zoopla.com/ "Zoopla homepage") I really got stuck into Tech SEO. I work with a cross-functional team of developers and content writers to deprecate / redirect old content, optimise existing content and brief out new stuff to align with business goals.
 
@@ -64,7 +64,7 @@ I supported on a project to bring back a subset of ~400k pages from a blanket no
 It was a very instructive experience and facilitated a pivot towards Tech SEO in my new role.  
 &nbsp;
 
-![Wise logo](/images/png/wise-logo-small.png)
+![Wise logo](/images/webp/wise-logo-small.webp)
 
 As of mid-April 2022, I'll be starting as a Tech SEO in [Wise's](https://wise.com/) Owned Sites team. 
 I'll keep this blog updated as I go!
@@ -78,7 +78,7 @@ Some vaguely interesting things about me
 *   I've got a twin brother called Alex
 *   I love cattos and if I see one, I will almost certainly attempt to stroke it 👇
 
-![Jimmy - a cat - hiding under my laptop](/images/png/jimmy-under-the-laptop.png)
+![Jimmy - a cat - hiding under my laptop](/images/webp/jimmy-under-the-laptop.webp)
 
 <center>_A welcome distraction._</center>
 
@@ -89,8 +89,8 @@ Some vaguely interesting things about me
   "@context": "https://schema.org/",
   "@type": "Person",
   "name": "Freddie Larkins",
-  "url": "https://freddielarkins.xyz",
-  "image": "https://freddielarkins.xyz/theme/img/profile.png",
+  "url": "https://freddielarkins.xyz/",
+  "image": "https://freddielarkins.xyz/images/webp/freddie-larkins-mugshot.webp",
   "sameAs": "https://www.linkedin.com/in/freddielarkins/",
   "jobTitle": "Senior SEO Analyst",
   "worksFor": {
