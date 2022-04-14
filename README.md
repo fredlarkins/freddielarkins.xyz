@@ -2,7 +2,8 @@
 Configs, content and other stuff for my personal blog.
 
 ## To do:
-- [ ] Cron job for converting images to webp (and resizing)
+- [ ] Update schema on about page (make more detailed - see [JC Chouinard's  example](https://www.jcchouinard.com/about-jcchouinard/))
+- [ ] Cron job for converting images to webp (and resizing) -- integrate webp-convert script
 - [ ] Clean up vhost file with an `Include` directive to a shared conf for ports 80 and 443
 - [ ] Convert remaining images to .webp (set up script to do so or use [Ciffone Digital's repo](https://github.com/Ciffone-Digital/webp_check/blob/main/webp_check.py)
 - [ ] Clean up pelican.conf (alphabetise?)
