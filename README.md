@@ -2,6 +2,9 @@
 Configs, content and other stuff for my personal blog.
 
 ## To do:
+- [ ] Redirect to .com?
+    - Identify all links to xyz
+    - Staging site?
 - [ ] Update schema on about page (make more detailed - see [JC Chouinard's  example](https://www.jcchouinard.com/about-jcchouinard/))
 - [ ] Cron job for converting images to webp (and resizing) -- integrate webp-convert script
 - [ ] Clean up vhost file with an `Include` directive to a shared conf for ports 80 and 443
